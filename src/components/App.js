@@ -1,9 +1,13 @@
 import React from "react";
 
+import "../Sass/main.scss"
+
+import Navbar from "./navbar"
+
 const App = () => {
   return (
     <React.Fragment>
-      <h1>menna</h1>
+      <Navbar/>
     </React.Fragment>
   );
 };
