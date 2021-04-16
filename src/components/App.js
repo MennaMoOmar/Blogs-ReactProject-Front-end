@@ -1,14 +1,29 @@
 import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import "../Sass/main.scss"
 
 import Navbar from "./navbar"
+import Home from "./home"
+import About from "./about"
+import ContactUs from "./contactUs"
+import NotFound from "./notFound"
 
 const App = () => {
   return (
-    <React.Fragment>
+    <>
       <Navbar/>
-    </React.Fragment>
+      <main>
+        <Switch>
+            <Route path="/about" component={About} />
+            <Route path="/contactus" component={ContactUs} />
+            <Route path="/notfound" component={NotFound} />
+            <Route path="/home" component={Home} />
+            <Redirect from="/" exact to="/home" />
+            <Redirect to="/notfound" />
+        </Switch>
+      </main>
+    </>
   );
 };
 
