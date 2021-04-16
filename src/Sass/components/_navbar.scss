@@ -1,3 +1,42 @@
-.b{
-    color: $x;
+.navBar{
+    background-color: $colGhostWhite;
+    &__image{
+        width: 40px;
+    }
+    &__span{
+        position: "relative";
+        top: "6px";
+        left: "5px";
+        color: #eac9c0;
+        font-family: cursive;
+    }
+    &__middle {
+        flex-direction: "column";
+    }
+    &__list{
+        &__item{
+            &__link{
+                color: $colPurple;
+                font-family: sans-serif;
+                &--active{
+                    color:$colMixPurpleBlue;
+                }
+            }
+        }
+    }
+    &__button{
+        border-radius: 20px;
+        &__link{
+            border: 2px solid $colPurple;
+            color: $colPurple;
+            font-family: cursive;
+            padding: "0px";
+            border-radius: 30px;
+            &:hover{
+                background-color: $colPurple;
+                color: $colGhostWhite;
+                cursor: pointer;
+            }
+        }
+    }
 }

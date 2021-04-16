@@ -1,9 +1,10 @@
 import React from "react";
 
+import HeroSection from "./heroSection"
 const Home = () => {
     return ( 
         <React.Fragment>
-            <h1>Home</h1>
+            <HeroSection></HeroSection>
         </React.Fragment>
     );
 }
