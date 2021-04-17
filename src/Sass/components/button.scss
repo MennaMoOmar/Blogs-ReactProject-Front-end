@@ -1,0 +1,13 @@
+.button {
+  border-radius: 20px;
+  border: 2px solid $colPurple;
+  color: $colPurple;
+  font-family: cursive;
+  border-radius: 30px;
+  &:hover {
+    background-color: $colPurple;
+    color: $colGhostWhite;
+    cursor: pointer;
+    transition: 200ms linear all;
+  }
+}

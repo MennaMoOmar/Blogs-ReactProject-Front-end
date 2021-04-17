@@ -1,0 +1,14 @@
+.herosection{
+    height: 43vh;
+    .container{
+        text-align: center;
+        padding-top: 7rem;
+    }
+    &__header{
+        color: $colPurple;
+    }
+    &__para{
+        color: $colMixPurpleBlue;
+        margin-bottom: 3rem;
+    }
+}
