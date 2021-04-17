@@ -3,7 +3,20 @@ import React from "react";
 const ContactUs = () => {
     return ( 
         <React.Fragment>
-            <h1>contact</h1>
+            <div className="contact">
+                <div className="wrapper">
+                    <div className="container">
+                        <h2 className="contact__header">CONTACT US</h2>
+                        <div className="contact__frmwrapper">
+                            <form className="contact__form" action="">
+                                <input className="contact__form__input input is-link" type="text" placeholder="Email"/>
+                                <textarea className="contact__textarea textarea is-link" type="text" placeholder="Leave your message here"></textarea>
+                                <button className="contact__form__btn blogs__morebtn button is-rounded">See more...</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </React.Fragment>
     );
 }

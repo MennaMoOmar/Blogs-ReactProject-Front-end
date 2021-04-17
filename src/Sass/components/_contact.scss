@@ -1,0 +1,35 @@
+.contact{
+    background-image: url("../images/contact2.jpeg");
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    .wrapper{
+        background-color: #b8b8ff70;
+        height: inherit;
+    }
+    &__header{
+        color: $colPurple;
+        text-align: center;
+        padding-top: 3rem;
+        width: fit-content;
+        margin: 0 auto;
+        border-bottom: 2px solid;
+    }
+    // &__frmwrapper{
+
+    // }
+    &__form{
+        margin: 0 auto;
+        margin-bottom: 0rem;
+        padding: 3rem;
+        width: 50%;
+        .is-link{
+            margin: 1rem;
+            background-color: #ffffff6b;
+        }
+        // &__input{}
+        // &__textarea{}
+        &__btn{
+            margin: 0 auto;
+        }
+    }
+}

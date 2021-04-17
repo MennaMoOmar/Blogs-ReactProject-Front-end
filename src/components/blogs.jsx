@@ -10,7 +10,7 @@ const Blogs = () => {
                     <h2 className="blogs__header">Blogs</h2>
                     <Card></Card>
                     <Card></Card>
-                    <button class="blogs__morebtn button is-rounded">See more...</button>
+                    <button className="blogs__morebtn button is-rounded">See more...</button>
                 </div>
             </div>
         </React.Fragment>

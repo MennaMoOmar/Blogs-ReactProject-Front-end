@@ -36,7 +36,7 @@ const Card = () => {
         <div className="card__social card-content">
             {/* <FavoriteIcon className="card__social__like"></FavoriteIcon> */}
             <FavoriteBorderIcon className="card__social__like"></FavoriteBorderIcon>
-            <input class="card__social__comment input is-rounded" type="text" placeholder="Add Comment"></input>
+            <input className="card__social__comment input is-rounded" type="text" placeholder="Add Comment"></input>
             <SendIcon className="card__social__send"></SendIcon>
         </div>
       </div>
