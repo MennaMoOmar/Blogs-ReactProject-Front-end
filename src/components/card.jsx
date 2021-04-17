@@ -1,5 +1,9 @@
 import React from "react";
 
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+import SendIcon from '@material-ui/icons/Send';
+
 const Card = () => {
   return (
     <React.Fragment>
@@ -11,7 +15,7 @@ const Card = () => {
           <div className="card__content__media media">
             <div className="media-left">
               <figure className="image is-48x48">
-                <img src="./logo512.png" alt="" />
+                <img src="./images/user.png" alt="" />
               </figure>
             </div>
             <div className="media-content">
@@ -28,6 +32,12 @@ const Card = () => {
               assumenda quo.
             </p>
           </div>
+        </div>
+        <div className="card__social card-content">
+            {/* <FavoriteIcon className="card__social__like"></FavoriteIcon> */}
+            <FavoriteBorderIcon className="card__social__like"></FavoriteBorderIcon>
+            <input class="card__social__comment input is-rounded" type="text" placeholder="Add Comment"></input>
+            <SendIcon className="card__social__send"></SendIcon>
         </div>
       </div>
     </React.Fragment>

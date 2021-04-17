@@ -28,4 +28,28 @@
             }
         }
     }
+    &__social{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &__like{
+            font-size: 2rem !important;
+            color: $colUnblishedSilk;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+        &__comment{
+            margin: 0rem 1rem;
+            // &:hover{
+            // }
+        }
+        &__send{
+            font-size: 2rem !important;
+            color: $colPurple;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
 }

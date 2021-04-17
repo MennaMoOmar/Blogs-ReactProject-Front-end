@@ -10,7 +10,7 @@ const Navbar = () => {
           <a className="navbar-brand" href="/">
             <img
               className="navBar__image"
-              src="./images/logo.png"
+              src="./images/logo2.png"
               alt="logo"
             ></img>
             <span className="navBar__span">Blogs</span>
@@ -52,7 +52,7 @@ const Navbar = () => {
               <li className="navBar__list__item nav-item">
                 <NavLink
                   className="navBar__list__item__link nav-link"
-                  to="/blog"
+                  to="/blogs"
                 >
                   BLOGS
                 </NavLink>

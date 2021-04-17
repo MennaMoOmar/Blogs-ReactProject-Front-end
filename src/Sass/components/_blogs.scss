@@ -9,6 +9,14 @@
     &__header{
         color: $colPurple;
         text-align: center;
-        padding-bottom: 3rem;
+        padding-bottom: .5rem;
+        width: fit-content;
+        margin: 0 auto;
+        border-bottom: 2px solid;
+    }
+    &__morebtn{
+        display: grid;
+        margin: 0 auto;
+        margin-bottom: 2rem;
     }
 }

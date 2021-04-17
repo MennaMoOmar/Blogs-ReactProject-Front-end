@@ -6,6 +6,7 @@ import "../Sass/main.scss"
 import Navbar from "./navbar"
 import Home from "./home"
 import About from "./about"
+import Blogs from "./blogs"
 import ContactUs from "./contactUs"
 import NotFound from "./notFound"
 
@@ -16,6 +17,7 @@ const App = () => {
       <main>
         <Switch>
             <Route path="/about" component={About} />
+            <Route path="/blogs" component={Blogs} />
             <Route path="/contactus" component={ContactUs} />
             <Route path="/notfound" component={NotFound} />
             <Route path="/home" component={Home} />
