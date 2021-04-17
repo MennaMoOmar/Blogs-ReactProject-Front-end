@@ -1,0 +1,9 @@
+.blogs{
+    background-color: $colGhostWhite;
+    padding: 3rem;
+    display: grid;
+    justify-content: center;
+    &__header{
+        color: $colPurple;
+    }
+}
