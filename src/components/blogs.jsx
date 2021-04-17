@@ -9,6 +9,7 @@ const Blogs = () => {
                 <div className="container">
                     <h2 className="blogs__header">Blogs</h2>
                     <Card></Card>
+                    <Card></Card>
                 </div>
             </div>
         </React.Fragment>

@@ -1,0 +1,31 @@
+.card{
+    width: 50%;
+    margin: 3rem auto;
+    &__image{
+        height: 300px;
+        img{
+            height: 100%;
+            width: 100%;
+        }
+    }
+    &__content{
+        background-color: $colGhostWhite;
+        &__media{
+            &__title{
+                color: $fontColor;
+            }
+            &__name{
+                color: $colPurple;
+            }
+            img{
+                border-radius: 50px;
+                border: 2px solid $colPurple;
+            }
+        }
+        &__describtion{
+            &__para{
+                color: $fontColor;
+            }
+        }
+    }
+}
