@@ -7,4 +7,13 @@
         margin: 0 auto;
         border-bottom: 3px solid;
     }
+    &__form{
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        input{
+            border-color: $colPurple;
+        }
+    }
 }
