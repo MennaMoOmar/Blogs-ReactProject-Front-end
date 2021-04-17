@@ -68,7 +68,7 @@ const Navbar = () => {
             </ul>
           </div>
           <button className="navBar__button btn">
-            <NavLink className="navBar__button__link nav-link" to="/login">
+            <NavLink className="navBar__button__link nav-link" to="/joinus">
               JOIN US
             </NavLink>
           </button>

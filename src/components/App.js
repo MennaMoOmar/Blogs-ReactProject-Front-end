@@ -8,6 +8,7 @@ import Home from "./home"
 import About from "./about"
 import Blogs from "./blogs"
 import ContactUs from "./contactUs"
+import JoinUs from "./joinus"
 import NotFound from "./notFound"
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/about" component={About} />
             <Route path="/blogs" component={Blogs} />
             <Route path="/contactus" component={ContactUs} />
+            <Route path="/joinus" component={JoinUs} />
             <Route path="/notfound" component={NotFound} />
             <Route path="/home" component={Home} />
             <Redirect from="/" exact to="/home" />
