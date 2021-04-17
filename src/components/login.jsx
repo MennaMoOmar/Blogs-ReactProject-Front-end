@@ -3,7 +3,11 @@ import React from "react";
 const Login = () => {
     return ( 
         <React.Fragment>
-            <h2>login</h2>
+            <div className="login">
+                <div className="container">
+                    <h2 className="login__header">login</h2>
+                </div>
+            </div>
         </React.Fragment>
     );
 }

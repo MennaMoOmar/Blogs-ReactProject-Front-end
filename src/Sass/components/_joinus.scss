@@ -1,3 +1,6 @@
 .joinus{
     padding: 3rem 0rem;
+    &__register{
+        border-right: 3px solid $colPurple;
+    }
 }
