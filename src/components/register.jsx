@@ -99,15 +99,15 @@ const Register = () => {
                 </p>
               </div>
               {/* image */}
-              <div class="is-info">
-                <label class="file-label">
-                  <input class="file-input" type="file" name="image" />
-                  <span class="register__form__image file-cta">
-                    <span class="file-icon">
-                      {/* <i class="fas fa-upload"></i> */}
+              <div className="is-info">
+                <label className="file-label">
+                  <input className="file-input" type="file" name="image" />
+                  <span className="register__form__image file-cta">
+                    <span className="file-icon">
+                      {/* <i className="fas fa-upload"></i> */}
                       <PhotoCameraIcon></PhotoCameraIcon>
                     </span>
-                    <span class="file-label">Upload Image</span>
+                    <span className="file-label">Upload Image</span>
                   </span>
                 </label>
               </div>
