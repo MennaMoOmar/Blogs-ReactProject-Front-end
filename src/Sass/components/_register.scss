@@ -1,10 +1,27 @@
 .register{
     text-align: center;
     &__header{
-        color: $colUnblishedSilk;
+        color: $colMixPurpleBlue;
         padding-bottom: .5rem;
         width: fit-content;
         margin: 0 auto;
         border-bottom: 3px solid;
+    }
+    &__form{
+        width: 70%;
+        margin: 0 auto;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        input{
+            border-color: $colPurple;
+        }
+        &__image{
+            background-color: #ffff;
+            color: $colPurple;
+            border-color: $colPurple;
+        }
+        &__register{
+            margin-top: 2rem;
+        }
     }
 }
