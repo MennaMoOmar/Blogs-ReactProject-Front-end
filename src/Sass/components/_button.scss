@@ -8,6 +8,7 @@
     background-color: $colPurple;
     color: $colGhostWhite;
     cursor: pointer;
-    transition: 200ms linear all;
+    transform: translateY(-5px);
+    transition: 300ms linear all;
   }
 }
