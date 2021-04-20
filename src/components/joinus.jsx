@@ -7,6 +7,7 @@ const Home = () => {
     return ( 
         <React.Fragment>
             <div className="joinus">
+                <div className="joinus__wrapper">
                 <div className="container">
                     <div className="row">
                         <div className="joinus__register col-lg-6">
@@ -16,6 +17,7 @@ const Home = () => {
                             <Login></Login>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </React.Fragment>
