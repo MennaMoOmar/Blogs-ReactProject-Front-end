@@ -1,4 +1,4 @@
-.login{
+.register{
     text-align: center;
     // margin: 0 auto;
     // padding: 2rem;
@@ -8,11 +8,12 @@
     // border-radius: 1.5rem;
     // box-shadow: 5px 10px 15px #e0e0ff;
     &__header{
-        color: $colMixPurpleBlue;
+        color: $colPurple;
         padding-bottom: .5rem;
         width: fit-content;
         margin: 0 auto;
         border-bottom: 3px solid;
+        position: relative;
     }
     &__form{
         width: 70%;
@@ -22,7 +23,12 @@
         input{
             border-color: $colPurple;
         }
-        &__login{
+        &__image{
+            background-color: #ffff;
+            color: $colPurple;
+            border-color: $colPurple;
+        }
+        &__register{
             margin-top: 2rem;
         }
     }

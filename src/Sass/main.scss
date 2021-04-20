@@ -4,17 +4,19 @@
 //--------------------------base-------------------------
 @import "base/reset";
 //--------------------------component---------------------
-@import "components/navbar";
-@import "components/herosection";
-@import "components/about";
 @import "components/card";
-@import "components/blogs";
-@import "components/contact";
-@import "components/footer";
-@import "components/joinus";
-@import "components/login";
-@import "components/register";
 @import "components/totop";
+@import "components/button";
+//--------------------------layout---------------------
+@import "layout/navbar";
+@import "layout/herosection";
+@import "layout/about";
+@import "layout/blogs";
+@import "layout/contact";
+@import "layout/footer";
+@import "layout/joinus";
+@import "layout/login";
+@import "layout/register";
+@import "layout/editprofile";
 
 
-@import "components/button.scss";

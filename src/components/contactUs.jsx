@@ -11,7 +11,7 @@ const ContactUs = () => {
                             <form className="contact__form" action="">
                                 <input className="contact__form__input input is-link" type="text" placeholder="Email"/>
                                 <textarea className="contact__textarea textarea is-link" type="text" placeholder="Leave your message here"></textarea>
-                                <button className="contact__form__btn blogs__morebtn button is-rounded">See more...</button>
+                                <button className="contact__form__btn blogs__morebtn button is-rounded">Send</button>
                             </form>
                         </div>
                     </div>
