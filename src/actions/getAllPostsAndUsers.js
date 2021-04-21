@@ -1,7 +1,7 @@
-import getAllPosts from './getAllPosts';
-import getUserById from './GetUserById';
+import * as getAllPosts from './getAllPosts';
+import * as getUserById from './GetUserById';
 
-const getAllPostsAndUsers = () => async (dispatch, getState) => {
+export const getAllPostsAndUsers = () => async (dispatch, getState) => {
     await dispatch(getAllPosts())
     const users = getState().posts.map(p => p.userId);
     const uniqueUsers = [];
@@ -12,4 +12,4 @@ const getAllPostsAndUsers = () => async (dispatch, getState) => {
     uniqueUsers.forEach(usr => dispatch(getUserById(usr)))
 }
 
-export default getAllPostsAndUsers;
+// export default getAllPostsAndUsers;

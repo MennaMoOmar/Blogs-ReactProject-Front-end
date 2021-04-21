@@ -1,3 +1,3 @@
-// export * from './getAllPosts'
-// export * from './getAllUsers'
-// export * from './getAllPostsAndUsers'
+export * from './getAllPosts'
+export * from './getAllUsers'
+export * from './getAllPostsAndUsers'
