@@ -3,15 +3,15 @@
     background-image: url('../images/login9.jpg');
     background-size: 100% 100%;
     &__register{
-        border-right: 2rem solid white;
+        // border-right: 2rem solid white;
         padding-top: 3rem;
     }
     &__login{
-        border-left: 2rem solid white;
+        // border-left: 2rem solid $colPurple;
         padding-top: 3rem;
     }
     &__wrapper{
-        margin: 2rem 4rem;
+        // margin: 2rem 4rem;
         background-color: rgba(0, 0, 0, 0.068);
     }
 }
