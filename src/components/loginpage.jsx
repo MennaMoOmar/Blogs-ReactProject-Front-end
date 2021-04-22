@@ -1,27 +1,26 @@
 import React from "react";
 
-import Login from "./login"
-import Register from "./register"
+import Login from "./login";
+import Register from "./register";
 
 const Home = () => {
-    return ( 
-        <React.Fragment>
-            <div className="joinus">
-                <div className="joinus__wrapper">
-                <div className="container">
-                    <div className="row">
-                        <div className="joinus__register col-lg-6">
-                            <Register></Register>
-                        </div>
-                        <div className="joinus__login col-lg-6">
-                            <Login></Login>
-                        </div>
-                    </div>
-                </div>
-                </div>
+  return (
+    <React.Fragment>
+      <div className="loginpage">
+        <div className="loginpage__wrapper">
+          <div className="container">
+            <div className="row">
+              <div className="loginpage__login col-lg-6">
+                <Login></Login>
+                {/* <p>Create new account</p> */}
+              </div>
+              <div className="loginpage__image col-lg-6"></div>
             </div>
-        </React.Fragment>
-    );
-}
- 
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
+
 export default Home;

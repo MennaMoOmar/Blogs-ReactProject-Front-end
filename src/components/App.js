@@ -9,6 +9,7 @@ import About from "./about"
 import Blogs from "./blogs"
 import ContactUs from "./contactUs"
 import JoinUs from "./joinus"
+import LoginPage from "./loginpage"
 import EditProfile from "./editProfile"
 import NotFound from "./notFound"
 
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/blogs" component={Blogs} />
             <Route path="/contactus" component={ContactUs} />
             <Route path="/joinus" component={JoinUs} />
+            <Route path="/loginpage" component={LoginPage} />
             <Route path="/editprofile" component={EditProfile} />
             <Route path="/notfound" component={NotFound} />
             <Route path="/home" component={Home} />
