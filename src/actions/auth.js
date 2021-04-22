@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 
-// import db from '../apis/db';
+import db from '../apis/db';
 
 export const authStart = () => {
     return{
@@ -8,10 +8,11 @@ export const authStart = () => {
     }
 }
 
-export const authSuccess = (authdata) => {
+export const authSuccess = (token, userId) => {
     return{
         type: "AUTH_SUCCESS",
-        payload: authdata
+        idToken: token,
+        userId: userId
     }
 }
 
@@ -22,7 +23,7 @@ export const authFail = (error) => {
     }
 }
 
-export const auth = (username, password) => (dispatch) => {
+export const auth = (username, password) => async (dispatch) => {
     dispatch(authStart());
     const authdata = {
         username: username,
@@ -30,13 +31,23 @@ export const auth = (username, password) => (dispatch) => {
         token: true
     };
     console.log(authdata)
-    axios.post("http://localhost:3001/user/login", authdata)
-    .then (response => {
+    try{
+        const response = await db.post('/user/login', authdata);
         console.log(response)
-        dispatch(authSuccess(response.data))
-    })
-    .catch(err=>{
+        dispatch(authSuccess(response.data.idToken, response.data.localId))
+    }
+    catch(err){
         console.log(err)
         dispatch(authFail(err))
-    })
+    }
+
+    // axios.post("http://localhost:3001/user/login", authdata)
+    // .then (response => {
+    //     console.log(response)
+    //     dispatch(authSuccess(response.data))
+    // })
+    // .catch(err=>{
+    //     console.log(err)
+    //     dispatch(authFail(err))
+    // })
 }

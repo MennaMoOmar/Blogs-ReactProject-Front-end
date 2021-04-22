@@ -19,6 +19,7 @@ const App = () => {
       <main>
         <Switch>
             <Route path="/about" component={About} />
+            {/* <Route path="/blogs"  render={(props) => <Blogs {...props}/>} /> */}
             <Route path="/blogs" component={Blogs} />
             <Route path="/contactus" component={ContactUs} />
             <Route path="/joinus" component={JoinUs} />

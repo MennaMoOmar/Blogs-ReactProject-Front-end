@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
+import { useHistory } from "react-router";
 
-import { authStart, auth } from "./../actions";
+import { auth } from "./../actions";
 
 const Login = (props) => {
+
+  /* history */
+  const history = useHistory();
 
   /* hooks */
   const [username] = useState();
@@ -51,7 +55,6 @@ const Login = (props) => {
       password: user.password,
       errors: errors,
     });
-    console.log(user.username);
   };
   /* handleChangePassword */
   let handleChangePassword = (e) => {
@@ -60,14 +63,16 @@ const Login = (props) => {
       password: e.target.value,
       errors: errors,
     });
-    console.log(user.password);
   };
 
+  /* submit login */
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(history)
     props.onAuth(user.username, user.password)
     const errorr = validate();
     if (errorr) return;
+    // history.push("/blogs")
   };
 
   return (
@@ -135,7 +140,7 @@ const Login = (props) => {
                 )}
               </div>
               <button className="login__form__login blogs__morebtn button is-rounded">
-                Login
+              Login
               </button>
             </form>
           </div>
@@ -145,9 +150,15 @@ const Login = (props) => {
   );
 };
 
+/* mapStateToProps */
+const mapStateToProps = (state)=>{
+  console.log(state)
+}
+/* mapDispatchToProps */
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (username, password) => dispatch(auth(username, password)),
   };
 };
-export default connect(null, mapDispatchToProps)(Login);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
