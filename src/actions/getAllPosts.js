@@ -5,5 +5,3 @@ export const getAllPosts = () => async dispatch => {
     // console.log(responce.data)
     dispatch({type:"GET_ALL_POSTS",payload: responce.data});
 }
-
-// export default getAllPosts;

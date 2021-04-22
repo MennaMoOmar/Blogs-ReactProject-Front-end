@@ -1,23 +1,19 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import {getAllUsers, getAllPosts, getAllPostsAndUsers} from "./../actions"
-
+import { getAllPosts } from "./../actions"
 import UserName from "./userName"
 
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SendIcon from "@material-ui/icons/Send";
 
 const Card = (props) => {
-  // console.log(props.users);
-  // const user = props.users.find((u) => u._id === "606f3dc414ea1627f80d0af2")
-  // console.log(user.firstname)
 
+  const { getAllPosts } = props;
+  
   useEffect(() => {
-    props.getAllPosts();
-    props.getAllUsers();
-    // props.getAllPostsAndUsers();
-  }, []);
+    getAllPosts();
+  }, [getAllPosts]);
 
   return (
     <React.Fragment>
@@ -38,10 +34,9 @@ const Card = (props) => {
                   <p className="card__content__media__title title is-4">
                     {post.title}
                   </p>
-                  <p className="card__content__media__name subtitle is-6">
-                    {post.userId}
-                    {/* <UserName userId={post.userId}></UserName> */}
-                  </p>
+                  <div className="card__content__media__name subtitle is-6">
+                  <UserName userId={post.userId}></UserName>
+                  </div>
                 </div>
               </div>
               <div className="card__content__describtion content">
@@ -68,11 +63,10 @@ const Card = (props) => {
 
 // mapStateToProps
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     posts: state.posts,
-    // users: state.users
   };
 };
 
-export default connect(mapStateToProps, { getAllUsers, getAllPosts })(Card);
+export default connect(mapStateToProps, { getAllPosts })(Card);

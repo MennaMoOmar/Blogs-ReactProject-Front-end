@@ -7,6 +7,6 @@ import getUserByIdReducer from "./getUserByIdReducer";
 const rootReducer = combineReducers({
     posts: getAllPostsReducer,
     users: getAllUsersReducer,
-    oneUser: getUserByIdReducer
+    user: getUserByIdReducer
 });
 export default rootReducer;

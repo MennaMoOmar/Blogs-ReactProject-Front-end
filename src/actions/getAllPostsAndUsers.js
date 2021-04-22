@@ -1,5 +1,5 @@
 import * as getAllPosts from './getAllPosts';
-import * as getUserById from './GetUserById';
+import * as getUserById from './getUserById';
 
 export const getAllPostsAndUsers = () => async (dispatch, getState) => {
     await dispatch(getAllPosts())
@@ -11,5 +11,3 @@ export const getAllPostsAndUsers = () => async (dispatch, getState) => {
     });
     uniqueUsers.forEach(usr => dispatch(getUserById(usr)))
 }
-
-// export default getAllPostsAndUsers;

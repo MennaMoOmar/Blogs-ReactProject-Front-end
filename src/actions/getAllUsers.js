@@ -5,5 +5,3 @@ export const getAllUsers = () => async dispatch => {
     // console.log(responce.data)
     dispatch({type:"GET_ALL_USERS",payload: responce.data});
 }
-
-// export default getAllUsers;
