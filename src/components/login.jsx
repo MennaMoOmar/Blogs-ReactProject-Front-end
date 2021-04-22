@@ -5,6 +5,8 @@ import joi from "joi-browser";
 import { authStart, auth } from "./../actions";
 
 const Login = (props) => {
+
+  /* hooks */
   const [username] = useState();
   const [password] = useState();
   const [errors, setErrors] = useState({ username, password });
@@ -14,6 +16,7 @@ const Login = (props) => {
     errors,
   });
 
+  /* schema */
   const schema = {
     username: joi.string().email().required(),
     password: joi.string().required().min(6),
@@ -30,7 +33,6 @@ const Login = (props) => {
     };
     delete urs2.errors;
     const res = joi.validate(urs2, schema, { abortEarly: false });
-    // console.log(res);
     if (res.error === null) {
       setErrors({});
       return null;
@@ -39,11 +41,10 @@ const Login = (props) => {
       errors[error.path] = error.message;
     }
     setErrors(errors);
-    // console.log(errors)
     return errors;
   };
 
-  /* input */
+  /* handleChangeUsername */
   let handleChangeUsername = (e) => {
     setuser({
       username: e.target.value,
@@ -53,6 +54,7 @@ const Login = (props) => {
     console.log(user);
     console.log(user.password);
   };
+  /* handleChangePassword */
   let handleChangePassword = (e) => {
     setuser({
       username: user.username,
@@ -65,11 +67,9 @@ const Login = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log(user)
-    // console.log(props)
+    props.onAuth(user.username, user.password)
     const errorr = validate();
     if (errorr) return;
-    console.log(errorr);
   };
 
   return (
