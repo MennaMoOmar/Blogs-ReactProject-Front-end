@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { getUserById } from "../actions";
 
 const UserName = (props) => {
-  const { getUserById, userId } = props;
+  const { getUserById, userId, user } = props;
 
   useEffect(() => {
     getUserById(userId);
-  }, [getUserById]);
+  }, [getUserById, userId]);
 
-  if (!props.user) return "Loading...";
+  if (!user) return "Loading...";
 
   return (
     <p>
