@@ -13,6 +13,7 @@ import EditProfile from "./editProfile"
 import NotFound from "./notFound"
 
 const App = () => {
+  // console.log(window.location.replace("/blogs"))
   return (
     <>
       <Navbar/>

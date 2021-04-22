@@ -4,9 +4,9 @@ import joi from "joi-browser";
 import { useHistory } from "react-router";
 
 import { auth } from "./../actions";
+import Spinner from "./spinner";
 
 const Login = (props) => {
-
   /* history */
   const history = useHistory();
 
@@ -68,12 +68,21 @@ const Login = (props) => {
   /* submit login */
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(history)
-    props.onAuth(user.username, user.password)
+    props.onAuth(user.username, user.password);
     const errorr = validate();
     if (errorr) return;
-    // history.push("/blogs")
+    console.log(props)
+    if(props.token){
+      history.push('/blogs')
+    }
   };
+
+  /* error message*/
+  let errorMessage = null;
+  // console.log(props.error)
+  if(props.error){
+    errorMessage = (<h1>hdudhuh</h1>)
+  }
 
   return (
     <React.Fragment>
@@ -81,68 +90,71 @@ const Login = (props) => {
         <div className="container">
           <h2 className="login__header">login</h2>
           <div className="login__frmwrapper">
-            <form className="login__form" action="" onSubmit={submitHandler}>
-              {/* email */}
-              <div className="field">
-                <p className="control has-icons-left has-icons-right">
-                  <input
-                    className="input"
-                    type="email"
-                    placeholder="Email"
-                    onChange={handleChangeUsername}
-                    value={username}
-                    id="username"
-                    name="username"
-                  />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-envelope"></i>
-                  </span>
-                  <span className="icon is-small is-right">
-                    {!errors.password && (
-                      <i className="fas fa-check text-success"></i>
-                    )}
-                    {errors.password && (
-                      <i className="fas fa-times text-danger"></i>
-                    )}
-                  </span>
-                </p>
-                {errors.username && (
-                  <div className="text-danger">{errors.username}</div>
-                )}
-              </div>
-              {/* password */}
-              <div className="field">
-                <p className="control has-icons-left has-icons-right">
-                  <input
-                    className="input"
-                    type="password"
-                    placeholder="Password"
-                    onChange={handleChangePassword}
-                    value={password}
-                    id="password"
-                    name="passwprd"
-                  />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-lock"></i>
-                  </span>
-                  <span className="icon is-small is-right">
-                    {/* <i className="fas fa-check"></i> */}
-                    {!errors.password && (
-                      <i className="fas fa-check text-success"></i>
-                    )}
-                    {errors.password && (
-                      <i className="fas fa-times text-danger"></i>
-                    )}
-                  </span>
-                </p>
-                {errors.password && (
-                  <div className="text-danger">{errors.password}</div>
-                )}
-              </div>
-              <button className="login__form__login blogs__morebtn button is-rounded">
-              Login
-              </button>
-            </form>
+            {errorMessage}
+            {<Spinner></Spinner> &&
+              <form className="login__form" action="" onSubmit={submitHandler}>
+                {/* email */}
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="email"
+                      placeholder="Email"
+                      onChange={handleChangeUsername}
+                      value={username}
+                      id="username"
+                      name="username"
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-envelope"></i>
+                    </span>
+                    <span className="icon is-small is-right">
+                      {!errors.password && (
+                        <i className="fas fa-check text-success"></i>
+                      )}
+                      {errors.password && (
+                        <i className="fas fa-times text-danger"></i>
+                      )}
+                    </span>
+                  </p>
+                  {errors.username && (
+                    <div className="text-danger">{errors.username}</div>
+                  )}
+                </div>
+                {/* password */}
+                <div className="field">
+                  <p className="control has-icons-left has-icons-right">
+                    <input
+                      className="input"
+                      type="password"
+                      placeholder="Password"
+                      onChange={handleChangePassword}
+                      value={password}
+                      id="password"
+                      name="passwprd"
+                    />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-lock"></i>
+                    </span>
+                    <span className="icon is-small is-right">
+                      {/* <i className="fas fa-check"></i> */}
+                      {!errors.password && (
+                        <i className="fas fa-check text-success"></i>
+                      )}
+                      {errors.password && (
+                        <i className="fas fa-times text-danger"></i>
+                      )}
+                    </span>
+                  </p>
+                  {errors.password && (
+                    <div className="text-danger">{errors.password}</div>
+                  )}
+                </div>
+                <button className="login__form__login blogs__morebtn button is-rounded">
+                  Login
+                </button>
+              </form>
+            }
           </div>
         </div>
       </div>
@@ -151,9 +163,14 @@ const Login = (props) => {
 };
 
 /* mapStateToProps */
-const mapStateToProps = (state)=>{
-  console.log(state)
-}
+const mapStateToProps = (state) => {
+  // console.log(state)
+  return {
+    loading: state.authReducer.loading,
+    error: state.authReducer.error,
+    token :state.authReducer.token
+  };
+};
 /* mapDispatchToProps */
 const mapDispatchToProps = (dispatch) => {
   return {

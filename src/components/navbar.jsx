@@ -69,7 +69,7 @@ const Navbar = () => {
           </div>
           <button className="navBar__button btn">
             <NavLink className="navBar__button__link nav-link" to="/joinus">
-              JOIN US
+              LOGIN
             </NavLink>
           </button>
         </div>
