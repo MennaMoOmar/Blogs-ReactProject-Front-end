@@ -51,8 +51,7 @@ const Login = (props) => {
       password: user.password,
       errors: errors,
     });
-    console.log(user);
-    console.log(user.password);
+    console.log(user.username);
   };
   /* handleChangePassword */
   let handleChangePassword = (e) => {
@@ -61,8 +60,7 @@ const Login = (props) => {
       password: e.target.value,
       errors: errors,
     });
-    console.log(user);
-    console.log(user.username);
+    console.log(user.password);
   };
 
   const submitHandler = (e) => {
