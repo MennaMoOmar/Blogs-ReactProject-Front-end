@@ -6,5 +6,11 @@
     }
     &__login{
         padding-top: 3rem;
+        &__register{
+            text-align: center;
+            &__link{
+                text-decoration: underline;
+            }
+        }
     }
 }

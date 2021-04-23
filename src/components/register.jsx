@@ -135,7 +135,7 @@ const Register = (props) => {
     );
     const errorr = validate();
     if (errorr) return;
-    history.push("/blogs");
+    history.push('/blogs')
   };
 
   return (

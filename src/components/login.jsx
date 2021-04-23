@@ -71,7 +71,7 @@ const Login = (props) => {
     props.onAuth(user.username, user.password);
     const errorr = validate();
     if (errorr) return;
-    console.log(props)
+    // console.log(props)
     if(props.token){
       history.push('/blogs')
     }
