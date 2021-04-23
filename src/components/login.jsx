@@ -164,7 +164,7 @@ const Login = (props) => {
 
 /* mapStateToProps */
 const mapStateToProps = (state) => {
-  // console.log(state)
+  console.log(state)
   return {
     loading: state.authReducer.loading,
     error: state.authReducer.error,

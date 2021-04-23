@@ -1,10 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { connect } from "react-redux";
+
+import { getUserById } from "./../actions"
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 import Card from "./card"
 
-const EditProfile = () => {
+const EditProfile = (props) => {
+  console.log(props.user)
+
+  const { getUserById, id, user } = props;
+
+  useEffect(() => {
+    getUserById(id);
+  }, [getUserById, id]);
+
   return (
     <React.Fragment>
       <div className="editprofile container">
@@ -16,7 +27,7 @@ const EditProfile = () => {
               alt=""
             />
           </div>
-          <h3 className="editprofile__header__name">menna omar</h3>
+          <h3 className="editprofile__header__name">{user.firstname} {user.lastname}</h3>
         </div>
         <div className="editprofile__edit">
           <div className="editprofile__frmwrapper">
@@ -27,16 +38,19 @@ const EditProfile = () => {
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="First Name"
+                    value={user.firstname}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Phone"
+                    value={user.phone}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="City"
+                    value={user.city}
                   />
                   <label className="editprofile__header__inputupload file-label">
                     <input className="file-input" type="file" name="image" />
@@ -53,16 +67,19 @@ const EditProfile = () => {
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Last Name"
+                    value={user.lastname}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Country"
+                    value={user.country}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Street"
+                    value={user.street}
                   />
                 </div>
               </div>
@@ -83,4 +100,13 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+// mapStateToProps
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return {
+    id: state.authReducer.userId,
+    user: state.user.find((u) => u._id === state.authReducer.userId)
+  };
+};
+
+export default connect(mapStateToProps, {getUserById})(EditProfile);

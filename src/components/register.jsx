@@ -8,7 +8,9 @@ import { register } from "./../actions";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 const Register = (props) => {
-  
+
+  // console.log(props.onRegister())
+
   /* history */
   const history = useHistory();
 

@@ -1,13 +1,35 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 
-import { logout } from "./../actions";
+import { logout, getProfile, getUserById } from "./../actions";
 
 const Navbar = (props) => {
   /* history */
   const history = useHistory();
+  console.log(props);
+  
+  const {token, id} = props;
+  useEffect(() => {
+    getProfile(token)
+    getUserById(id)
+  }, [token,id]);
+
+  // const {refBtnLogin, refBtnLogout} = props;
+
+  // const loginbtn = useRef(null);
+  // const logoutbtn = useRef(null);
+
+  // useEffect(() => {
+  //   if (loginbtn.current) {
+  //     loginbtn.current.style.display="none"
+  //     refBtnLogin(loginbtn.current)
+  //   }
+  //   if(logoutbtn.current){
+  //     refBtnLogout(logoutbtn.current)
+  //   }
+  // }, [refBtnLogout,refBtnLogin])
 
   const loginLogout = () => {
     if (props.token) {
@@ -84,6 +106,13 @@ const Navbar = (props) => {
               </li>
             </ul>
           </div>
+          {props.token && (
+            <span>
+              <NavLink className="navBar__auth__editprofile" to="/editprofile">
+                <i className="far fa-user"></i> Profile
+              </NavLink>
+            </span>
+          )}
           <button className="navBar__button btn" onClick={loginLogout}>
             <span className="navBar__button__link nav-link">
               {props.token ? "LOGOUT" : "LOGIN"}
@@ -97,10 +126,11 @@ const Navbar = (props) => {
 
 /* mapStateToProps */
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     token: state.authReducer.token,
+    id: state.authReducer.userId,
   };
 };
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, getProfile, getUserById })(Navbar);
