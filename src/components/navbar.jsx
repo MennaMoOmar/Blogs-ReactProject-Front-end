@@ -1,37 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 
-// import { refBtnLogin, refBtnLogout } from "./../actions";
+import { logout } from "./../actions";
 
 const Navbar = (props) => {
   /* history */
   const history = useHistory();
-  console.log(props);
-
-  // const {refBtnLogin, refBtnLogout} = props;
-
-  // const loginbtn = useRef(null);
-  // const logoutbtn = useRef(null);
-
-  // useEffect(() => {
-  //   if (loginbtn.current) {
-  //     // loginbtn.current.style.display="none"
-  //     refBtnLogin(loginbtn.current)
-  //   }
-  //   if(logoutbtn.current){
-  //     refBtnLogout(logoutbtn.current)
-  //   }
-  // }, [refBtnLogout,refBtnLogin])
 
   const loginLogout = () => {
     if (props.token) {
       console.log("token exist");
-      history.push('/')
+      history.push("/");
+      props.logout();
     } else {
       console.log("no token");
-      history.push('/loginpage')
+      history.push("/loginpage");
     }
   };
 
@@ -103,19 +88,7 @@ const Navbar = (props) => {
             <span className="navBar__button__link nav-link">
               {props.token ? "LOGOUT" : "LOGIN"}
             </span>
-
-            {/* <NavLink className="navBar__button__link nav-link" to="/loginpage">
-              {props.token? 'LOGOUT' : 'LOGIN'}
-            </NavLink> */}
           </button>
-          {/* <div className="navBar__auth">
-            <span><NavLink className="navBar__auth__editprofile" to="/editprofile"><i className="far fa-user"></i> Profile</NavLink></span>
-            <button className="navBar__button btn">
-              <NavLink className="navBar__button__link nav-link" to="/">
-                LOG OUT
-              </NavLink>
-            </button>
-          </div> */}
         </div>
       </nav>
     </React.Fragment>
@@ -128,10 +101,6 @@ const mapStateToProps = (state) => {
   return {
     token: state.authReducer.token,
   };
-  // return {
-  //   loginbtn: state.refBtnLogin,
-  //   logoutbtn: state.refBtnLogout,
-  // };
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

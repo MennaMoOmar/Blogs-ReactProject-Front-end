@@ -25,15 +25,15 @@ export const authFail = (error) => {
 
 export const logout = () => {
   return {
-      type: "AUTH_LOGOUT"
+    type: "AUTH_LOGOUT",
   };
 };
 
 export const checkAuthTimeout = (expirationTime) => {
-  return dispatch => {
-      setTimeout(() => {
-          dispatch(logout());
-      }, expirationTime);
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(logout());
+    }, expirationTime);
   };
 };
 
@@ -46,6 +46,16 @@ export const auth = (username, password) => async (dispatch) => {
   };
   // console.log(authdata)
 
+  axios
+    .post("http://localhost:3001/user/login", authdata)
+    .then((response) => {
+      dispatch(authSuccess(response.data.token, response.data.user._id));
+      dispatch(checkAuthTimeout(3600*1000)); //logout after 1h
+    })
+    .catch((err) => {
+      dispatch(authFail(err.response.data.error));
+    });
+
   // try{
   //     const response = await db.post('/user/login', authdata);
   //     console.log(response)
@@ -56,17 +66,4 @@ export const auth = (username, password) => async (dispatch) => {
   //     console.log(err.response.data.error.errors)
   //     dispatch(authFail(err))
   // }
-
-  axios
-    .post("http://localhost:3001/user/login", authdata)
-    .then((response) => {
-      dispatch(authSuccess(response.data.token, response.data.user._id));
-      dispatch(checkAuthTimeout(3600));
-      // localStorage.setItem("token", response.data.token);
-      // console.log(response.data)
-    })
-    .catch((err) => {
-      dispatch(authFail(err.response.data.error));
-      // console.log(err.response.data.error)
-    });
 };
