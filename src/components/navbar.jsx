@@ -1,8 +1,40 @@
-import React from "react";
-
+import React, { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
-const Navbar = () => {
+// import { refBtnLogin, refBtnLogout } from "./../actions";
+
+const Navbar = (props) => {
+  /* history */
+  const history = useHistory();
+  console.log(props);
+
+  // const {refBtnLogin, refBtnLogout} = props;
+
+  // const loginbtn = useRef(null);
+  // const logoutbtn = useRef(null);
+
+  // useEffect(() => {
+  //   if (loginbtn.current) {
+  //     // loginbtn.current.style.display="none"
+  //     refBtnLogin(loginbtn.current)
+  //   }
+  //   if(logoutbtn.current){
+  //     refBtnLogout(logoutbtn.current)
+  //   }
+  // }, [refBtnLogout,refBtnLogin])
+
+  const loginLogout = () => {
+    if (props.token) {
+      console.log("token exist");
+      history.push('/')
+    } else {
+      console.log("no token");
+      history.push('/loginpage')
+    }
+  };
+
   return (
     <React.Fragment>
       <nav className="navBar navbar navbar-expand-lg">
@@ -67,15 +99,39 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <button className="navBar__button btn">
-            <NavLink className="navBar__button__link nav-link" to="/loginpage">
-              LOGIN
-            </NavLink>
+          <button className="navBar__button btn" onClick={loginLogout}>
+            <span className="navBar__button__link nav-link">
+              {props.token ? "LOGOUT" : "LOGIN"}
+            </span>
+
+            {/* <NavLink className="navBar__button__link nav-link" to="/loginpage">
+              {props.token? 'LOGOUT' : 'LOGIN'}
+            </NavLink> */}
           </button>
+          {/* <div className="navBar__auth">
+            <span><NavLink className="navBar__auth__editprofile" to="/editprofile"><i className="far fa-user"></i> Profile</NavLink></span>
+            <button className="navBar__button btn">
+              <NavLink className="navBar__button__link nav-link" to="/">
+                LOG OUT
+              </NavLink>
+            </button>
+          </div> */}
         </div>
       </nav>
     </React.Fragment>
   );
 };
 
-export default Navbar;
+/* mapStateToProps */
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    token: state.authReducer.token,
+  };
+  // return {
+  //   loginbtn: state.refBtnLogin,
+  //   logoutbtn: state.refBtnLogout,
+  // };
+};
+
+export default connect(mapStateToProps)(Navbar);

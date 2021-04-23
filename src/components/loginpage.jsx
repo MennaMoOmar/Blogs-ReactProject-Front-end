@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import Login from "./login";
 
-const Home = () => {
+const Loginpage = () => {
   return (
     <React.Fragment>
       <div className="loginpage">
@@ -29,4 +29,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Loginpage;

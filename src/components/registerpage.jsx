@@ -2,7 +2,7 @@ import React from "react";
 
 import Register from "./register";
 
-const Home = () => {
+const RegisterPage = () => {
   return (
     <React.Fragment>
       <div className="registerpage">
@@ -22,4 +22,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default RegisterPage;

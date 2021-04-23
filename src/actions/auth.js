@@ -23,6 +23,20 @@ export const authFail = (error) => {
   };
 };
 
+export const logout = () => {
+  return {
+      type: "AUTH_LOGOUT"
+  };
+};
+
+export const checkAuthTimeout = (expirationTime) => {
+  return dispatch => {
+      setTimeout(() => {
+          dispatch(logout());
+      }, expirationTime);
+  };
+};
+
 export const auth = (username, password) => async (dispatch) => {
   dispatch(authStart());
   const authdata = {
@@ -47,7 +61,8 @@ export const auth = (username, password) => async (dispatch) => {
     .post("http://localhost:3001/user/login", authdata)
     .then((response) => {
       dispatch(authSuccess(response.data.token, response.data.user._id));
-      localStorage.setItem("token", response.data.token);
+      dispatch(checkAuthTimeout(1000));
+      // localStorage.setItem("token", response.data.token);
       // console.log(response.data)
     })
     .catch((err) => {

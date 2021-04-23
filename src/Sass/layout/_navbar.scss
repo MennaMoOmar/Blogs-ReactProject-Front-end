@@ -46,4 +46,17 @@
     .nav-link {
         padding: 0.3rem .7rem;
     }
+    &__auth{
+        span{
+            color: $colPurple;
+            font-family: sans-serif;
+            cursor: pointer;
+        }
+        &__editprofile{
+            color: $colPurple;
+            &:hover{
+                text-decoration: none;
+            }
+        }
+    }
 }
