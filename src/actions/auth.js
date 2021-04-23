@@ -61,7 +61,7 @@ export const auth = (username, password) => async (dispatch) => {
     .post("http://localhost:3001/user/login", authdata)
     .then((response) => {
       dispatch(authSuccess(response.data.token, response.data.user._id));
-      dispatch(checkAuthTimeout(1000));
+      dispatch(checkAuthTimeout(3600));
       // localStorage.setItem("token", response.data.token);
       // console.log(response.data)
     })
