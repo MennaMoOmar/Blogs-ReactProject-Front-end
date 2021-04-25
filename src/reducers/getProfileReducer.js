@@ -1,7 +1,7 @@
 const getProfileReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_PROFILE":
-      // return [...state, ...action.payload];
+      console.log("jhvh")
       console.log(action.payload);
       return action.payload;
 

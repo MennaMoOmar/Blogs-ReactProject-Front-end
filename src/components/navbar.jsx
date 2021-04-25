@@ -16,21 +16,6 @@ const Navbar = (props) => {
     getUserById(id)
   }, [token,id]);
 
-  // const {refBtnLogin, refBtnLogout} = props;
-
-  // const loginbtn = useRef(null);
-  // const logoutbtn = useRef(null);
-
-  // useEffect(() => {
-  //   if (loginbtn.current) {
-  //     loginbtn.current.style.display="none"
-  //     refBtnLogin(loginbtn.current)
-  //   }
-  //   if(logoutbtn.current){
-  //     refBtnLogout(logoutbtn.current)
-  //   }
-  // }, [refBtnLogout,refBtnLogin])
-
   const loginLogout = () => {
     if (props.token) {
       console.log("token exist");

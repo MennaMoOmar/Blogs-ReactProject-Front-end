@@ -73,6 +73,7 @@ const Login = (props) => {
     if (errorr) return;
     // console.log(props)
     if(props.token){
+      localStorage.setItem('token',props.token)
       history.push('/blogs')
     }
   };

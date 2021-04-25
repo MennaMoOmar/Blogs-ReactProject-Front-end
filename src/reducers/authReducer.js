@@ -33,6 +33,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
+  localStorage.removeItem('token')
   return updateObject(state,
     {
       token: null,

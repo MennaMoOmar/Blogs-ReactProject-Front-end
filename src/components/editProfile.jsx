@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 
-import { getUserById } from "./../actions"
+import { getUserById, getProfile } from "./../actions"
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
@@ -10,11 +10,15 @@ import Card from "./card"
 const EditProfile = (props) => {
   console.log(props.user)
 
-  const { getUserById, id, user } = props;
+  const { getUserById, id, token, user } = props;
 
   useEffect(() => {
     getUserById(id);
   }, [getUserById, id]);
+
+  useEffect(() => {
+    getProfile(token)
+  }, [getProfile, token]);
 
   return (
     <React.Fragment>
@@ -105,8 +109,11 @@ const mapStateToProps = (state) => {
   // console.log(state);
   return {
     id: state.authReducer.userId,
+    token: state.authReducer.token,
     user: state.user.find((u) => u._id === state.authReducer.userId)
+    // user: state.user.find((u) => u.token === state.authReducer.token)
+
   };
 };
 
-export default connect(mapStateToProps, {getUserById})(EditProfile);
+export default connect(mapStateToProps, {getUserById, getProfile})(EditProfile);
