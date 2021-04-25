@@ -8,10 +8,10 @@ export const register = (username, password, firstname, lastname, phone) => asyn
         lastname: lastname,
         phone: phone,
     };
-    console.log(regdata)
+    // console.log(regdata)
     try{
         const response = await db.post('/user', regdata);
-        console.log(response)
+        // console.log(response)
         dispatch({type:"REGISTER",payload: response.data});
     }
     catch(err){

@@ -1,10 +1,8 @@
 const getProfileReducer = (state = [], action) => {
   switch (action.type) {
     case "GET_PROFILE":
-      console.log("jhvh")
-      console.log(action.payload);
+      // console.log(action.payload);
       return action.payload;
-
     default:
       return state;
   }

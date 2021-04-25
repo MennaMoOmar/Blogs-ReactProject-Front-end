@@ -2,20 +2,6 @@
 
 import db from "../apis/db";
 
-// export const getProfile = async (token) => {
-//   console.log(token);
-//   const headerData = {
-//     headers: {
-//       'Authorization': token,
-//       'Accept': "application/json",
-//       'Content-Type': "application/json",
-//     }
-//   };
-//   const responce = await db.get("/user/profile", headerData);
-//   console.log(responce.data);
-//   return { type: "GET_PROFILE", payload: responce.data };
-// };
-
 export const getProfile = (token) =>
   // return dispatch => {
   //     axios.get("http://localhost:3001/user/profile", {headers:{'Authorization': token}})
@@ -28,7 +14,7 @@ export const getProfile = (token) =>
   //     console.log("gg")
   //   }
   async (dispatch) => {
-    console.log(token);
+    // console.log(token);
     const headerData = {
       headers: {
         'Authorization': token,
@@ -36,8 +22,8 @@ export const getProfile = (token) =>
         'Content-Type': "application/json"
       },
     };
-    console.log(headerData);
+    // console.log(headerData);
     const responce = await db.get("/user/profile", headerData);
-    console.log(responce);
+    // console.log(responce);
     dispatch({ type: "GET_PROFILE", payload: responce.data });
   };
