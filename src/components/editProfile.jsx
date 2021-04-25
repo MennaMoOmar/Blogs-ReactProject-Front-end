@@ -205,6 +205,9 @@ const EditProfile = (props) => {
                     id="firstname"
                     name="firstname"
                   />
+                  {errors.firstname && (
+                  <div className="text-danger">{errors.firstname}</div>
+                )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -214,6 +217,9 @@ const EditProfile = (props) => {
                     id="phone"
                     name="phone"
                   />
+                  {errors.phone && (
+                  <div className="text-danger">{errors.phone}</div>
+                )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -223,6 +229,9 @@ const EditProfile = (props) => {
                     id="city"
                     name="city"
                   />
+                  {errors.city && (
+                  <div className="text-danger">{errors.city}</div>
+                )}
                   <label className="editprofile__header__inputupload file-label">
                     <input className="file-input" type="file" name="image" />
                     <span className="register__form__image file-cta">
@@ -243,6 +252,9 @@ const EditProfile = (props) => {
                     id="lastname"
                     name="lastname"
                   />
+                  {errors.lastname && (
+                  <div className="text-danger">{errors.lastname}</div>
+                )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -252,6 +264,9 @@ const EditProfile = (props) => {
                     id="country"
                     name="country"
                   />
+                  {errors.country && (
+                  <div className="text-danger">{errors.country}</div>
+                )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -261,6 +276,9 @@ const EditProfile = (props) => {
                     id="street"
                     name="street"
                   />
+                  {errors.street && (
+                  <div className="text-danger">{errors.street}</div>
+                )}
                 </div>
               </div>
               <button className="editprofile__edit__form__btn--save  button is-rounded">
