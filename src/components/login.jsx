@@ -72,10 +72,10 @@ const Login = (props) => {
     const errorr = validate();
     if (errorr) return;
     // console.log(props)
-    if(props.token){
-      localStorage.setItem('token',props.token)
-      history.push('/blogs')
-    }
+    // if(props.token){
+    //   history.push('/blogs')
+    //   localStorage.setItem('token',props.token)
+    // }
   };
 
   /* error message*/
@@ -87,6 +87,10 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
+      {props.token&&
+      history.push('/blogs')
+      
+      }
       <div className="login">
         <div className="container">
           <h2 className="login__header">login</h2>
