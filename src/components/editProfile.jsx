@@ -12,13 +12,13 @@ const EditProfile = (props) => {
 
   const { getUserById, id, token, user } = props;
 
-  useEffect(() => {
-    getUserById(id);
-  }, [getUserById, id]);
+  // useEffect(() => {
+  //   getUserById(id);
+  // }, [getUserById, id]);
 
   useEffect(() => {
     getProfile(token)
-  }, [getProfile, token]);
+  }, [token]);
 
   return (
     <React.Fragment>
@@ -106,14 +106,13 @@ const EditProfile = (props) => {
 
 // mapStateToProps
 const mapStateToProps = (state) => {
-  // console.log(state);
+  console.log(state);
   return {
     id: state.authReducer.userId,
     token: state.authReducer.token,
-    user: state.user.find((u) => u._id === state.authReducer.userId)
-    // user: state.user.find((u) => u.token === state.authReducer.token)
-
+    user: state.getProfileReducer
+    // user: state.user.find((u) => u._id === state.authReducer.userId)
   };
 };
 
-export default connect(mapStateToProps, {getUserById, getProfile})(EditProfile);
+export default connect(mapStateToProps, {getUserById,getProfile})(EditProfile);

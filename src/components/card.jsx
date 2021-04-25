@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getAllPosts } from "./../actions"
+import { getAllPosts, getProfile } from "./../actions"
 import UserName from "./userName"
 
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -14,6 +14,10 @@ const Card = (props) => {
   useEffect(() => {
     getAllPosts();
   }, [getAllPosts]);
+
+  useEffect(() => {
+    props.getProfile(props.token);
+  }, [getProfile]);
 
   return (
     <React.Fragment>
@@ -66,7 +70,8 @@ const mapStateToProps = (state) => {
   // console.log(state);
   return {
     posts: state.posts,
+    token: state.authReducer.token,
   };
 };
 
-export default connect(mapStateToProps, { getAllPosts })(Card);
+export default connect(mapStateToProps, { getAllPosts,getProfile })(Card);

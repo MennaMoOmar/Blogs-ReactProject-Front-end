@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 import db from "../apis/db";
 
@@ -32,6 +32,8 @@ export const getProfile = (token) =>
     const headerData = {
       headers: {
         'Authorization': token,
+        'Accept': "application/json",
+        'Content-Type': "application/json"
       },
     };
     console.log(headerData);

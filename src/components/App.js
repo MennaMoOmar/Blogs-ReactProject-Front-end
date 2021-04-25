@@ -9,9 +9,9 @@ import About from "./about"
 import Blogs from "./blogs"
 import ContactUs from "./contactUs"
 import JoinUs from "./joinus"
+import EditProfile from "./editProfile"
 import LoginPage from "./loginpage"
 import RegisterPage from "./registerpage"
-import EditProfile from "./editProfile"
 import NotFound from "./notFound"
 
 const App = () => {
