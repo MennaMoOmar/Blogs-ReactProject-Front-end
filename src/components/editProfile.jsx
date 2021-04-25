@@ -20,13 +20,6 @@ const EditProfile = (props) => {
   }, [token]);
 
   /* hooks */
-  // const [firstname] = useState(userProfile.firstname);
-  // const [lastname] = useState(userProfile.lastname);
-  // const [phone] = useState(userProfile.phone);
-  // const [country] = useState(userProfile.country);
-  // const [city] = useState(userProfile.city);
-  // const [street] = useState(userProfile.street);
-
   const [firstname] = useState();
   const [lastname] = useState();
   const [phone] = useState();
@@ -42,12 +35,12 @@ const EditProfile = (props) => {
     street
   });
   const [user, setuser] = useState({
-    firstname,
-    lastname,
-    phone,
-    country,
-    city,
-    street,
+    firstname: userProfile.firstname,
+    lastname: userProfile.lastname,
+    phone: userProfile.phone,
+    country: userProfile.country,
+    city:userProfile.city,
+    street: userProfile.street,
     errors,
   });
 
@@ -88,7 +81,7 @@ const EditProfile = (props) => {
   };
 
   /* handleChangeFirstname */
-  let handleChangeFirstname = (e) => {
+  let handleChangeFirstname = (e, value) => {
     setuser({
       firstname: e.target.value,
       lastname: user.lastname,
@@ -201,7 +194,8 @@ const EditProfile = (props) => {
                     type="text"
                     placeholder="First Name"
                     onChange={handleChangeFirstname}
-                    value={firstname}
+                    // value={!firstname?userProfile.firstname:firstname}
+                    value={user.firstname}
                     id="firstname"
                     name="firstname"
                   />
@@ -213,7 +207,7 @@ const EditProfile = (props) => {
                     type="text"
                     placeholder="Phone"
                     onChange={handleChangePhone}
-                    value={phone}
+                    value={user.phone}
                     id="phone"
                     name="phone"
                   />
@@ -225,7 +219,7 @@ const EditProfile = (props) => {
                     type="text"
                     placeholder="City"
                     onChange={handleChangeCity}
-                    value={city}
+                    value={user.city}
                     id="city"
                     name="city"
                   />
@@ -248,7 +242,7 @@ const EditProfile = (props) => {
                     type="text"
                     placeholder="Last Name"
                     onChange={handleChangeLastname}
-                    value={lastname}
+                    value={user.lastname}
                     id="lastname"
                     name="lastname"
                   />
@@ -260,7 +254,7 @@ const EditProfile = (props) => {
                     type="text"
                     placeholder="Country"
                     onChange={handleChangeCountry}
-                    value={country}
+                    value={user.country}
                     id="country"
                     name="country"
                   />
@@ -272,7 +266,7 @@ const EditProfile = (props) => {
                     type="text"
                     placeholder="Street"
                     onChange={handleChangeStreet}
-                    value={street}
+                    value={user.street}
                     id="street"
                     name="street"
                   />
