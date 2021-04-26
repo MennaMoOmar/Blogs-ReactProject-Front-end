@@ -1,6 +1,15 @@
 .card{
     width: 100%;
     margin: 3rem auto;
+    &__deletebtn{
+        top: -10px;
+        left: -10px;
+        background-color: #f14668;
+        &:hover{
+            background-color: #e6103a;
+        }
+    }
+    
     &__image{
         height: 300px;
         img{
@@ -33,6 +42,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        &__edit{
+            i{
+                margin-right: .2rem;
+            }
+        }
         &__like{
             font-size: 2rem !important;
             color: $colUnblishedSilk;

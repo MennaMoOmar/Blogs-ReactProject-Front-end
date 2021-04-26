@@ -66,14 +66,39 @@
       }
     }
   }
-  &__posts{
+  &__posts {
     width: 50%;
     margin: 0 auto;
-    &__nopost{
+    &__nopost {
       color: $colPurple;
       text-align: center;
       margin: 3rem 0rem;
       font-size: 3.5rem;
+    }
+    &__add {
+      display: grid;
+      justify-content: end;
+      button {
+        margin-top: 2rem;
+        width: 50px inherit;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #9381ff;
+        border: none;
+        cursor: pointer;
+        &:hover{
+        border: 2px solid #9381ff;
+        background-color: #FFFF;
+          i{
+            color: #9381ff;
+          }
+        }
+        i {
+          color: #FFFF;
+          font-size: 2rem;
+        }
+      }
     }
   }
 }

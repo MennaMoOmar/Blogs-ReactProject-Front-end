@@ -9,7 +9,6 @@ import SendIcon from "@material-ui/icons/Send";
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 const ShowProfile = (props) => {
-  console.log(props.posts);
 
   const id = props.match.params.id;
   const { getUserById, getAllPostsByUserId, user, posts } = props;
@@ -144,7 +143,7 @@ const ShowProfile = (props) => {
 
 // mapStateToProps
 const mapStateToProps = (state, props) => {
-    console.log(state)
+    // console.log(state)
     // console.log(props)
   return {
     user: state.user.find((u) => u._id === props.match.params.id),
