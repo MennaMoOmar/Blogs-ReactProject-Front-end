@@ -8,6 +8,7 @@ import getProfileReducer from "./getProfileReducer";
 import registerReducer from "./registerReducer";
 import editProfileReducer from "./editProfileReducer";
 import getAllPostsLoginUserReducer from "./getAllPostsLoginUserReducer";
+import getAllPostsByUserIdReducer from "./getAllPostsByUserIdReducer";
 
 const rootReducer = combineReducers({
     posts: getAllPostsReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     getProfileReducer: getProfileReducer,
     registerReducer: registerReducer,
     editProfileReducer: editProfileReducer,
-    getAllPostsLoginUserReducer: getAllPostsLoginUserReducer
+    getAllPostsLoginUserReducer: getAllPostsLoginUserReducer,
+    getAllPostsByUserIdReducer: getAllPostsByUserIdReducer
 });
 export default rootReducer;
