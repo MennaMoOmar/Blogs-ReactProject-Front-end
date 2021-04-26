@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getUserById, getAllUsers } from "./../actions";
+import { getUserById } from "./../actions";
 
 // import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 // import SendIcon from "@material-ui/icons/Send";
@@ -10,14 +10,14 @@ import { getUserById, getAllUsers } from "./../actions";
 
 const ShowProfile = (props) => {
 
-  console.log(props);
+  console.log(props.user);
 
   const id = props.match.params.id;
+  const {getUserById, user} = props;
   
   useEffect(() => {
-    getAllUsers();
     getUserById(id);
-  }, [getAllUsers,id]);
+  }, [getUserById,id]);
 
   return (
     <React.Fragment>
@@ -30,7 +30,7 @@ const ShowProfile = (props) => {
               alt=""
             />
           </div>
-          <h3 className="editprofile__header__name">mmmm</h3>
+          <h3 className="editprofile__header__name">{user.firstname} {user.lastname}</h3>
         </div>
         <div className="editprofile__edit">
           <div className="editprofile__frmwrapper">
@@ -43,16 +43,19 @@ const ShowProfile = (props) => {
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="First Name"
+                    value={user.firstname}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Phone"
+                    value={user.phone}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="City"
+                    value={user.city}
                   />
                 </div>
                 <div className="col-lg-6">
@@ -60,16 +63,19 @@ const ShowProfile = (props) => {
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Last Name"
+                    value={user.lastname}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Country"
+                    value={user.country}
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Street"
+                    value={user.street}
                   />
                 </div>
               </div>
@@ -130,12 +136,9 @@ const ShowProfile = (props) => {
 
 // mapStateToProps
 const mapStateToProps = (state, props) => {
-  console.log(state);
-  console.log(props.match.params.id);
   return {
-    users: state.getAllUsers,
     user: state.user.find((u) => u._id === props.match.params.id),
   };
 };
 
-export default connect(mapStateToProps, { getUserById, getAllUsers })(ShowProfile);
+export default connect(mapStateToProps, { getUserById })(ShowProfile);
