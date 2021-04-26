@@ -69,5 +69,11 @@
   &__posts{
     width: 50%;
     margin: 0 auto;
+    &__nopost{
+      color: $colPurple;
+      text-align: center;
+      margin: 3rem 0rem;
+      font-size: 3.5rem;
+    }
   }
 }

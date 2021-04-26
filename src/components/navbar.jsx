@@ -1,20 +1,21 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 
-import { logout, getProfile, getUserById } from "./../actions";
+import { logout } from "./../actions";
 
 const Navbar = (props) => {
   /* history */
   const history = useHistory();
   console.log(props);
   
-  const {token, id} = props;
-  useEffect(() => {
-    getProfile(token)
-    getUserById(id)
-  }, [token,id]);
+  // const {token, id} = props;
+  // useEffect(() => {
+  //   getProfile(token)
+  //   getAllPostsLoginUser(token)
+  //   getUserById(id)
+  // }, [token,id]);
 
   const loginLogout = () => {
     if (props.token) {
@@ -118,4 +119,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { logout, getProfile, getUserById })(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);

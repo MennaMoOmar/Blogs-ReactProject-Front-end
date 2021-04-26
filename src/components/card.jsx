@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getAllPosts, getProfile } from "./../actions"
+import { getAllPosts, getProfile, getAllPostsLoginUser } from "./../actions"
 import UserName from "./userName"
 
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
@@ -9,15 +9,13 @@ import SendIcon from "@material-ui/icons/Send";
 
 const Card = (props) => {
 
-  const { getAllPosts } = props;
+  const { getAllPosts, getProfile, getAllPostsLoginUser, token } = props;
   
   useEffect(() => {
     getAllPosts();
-  }, [getAllPosts]);
-
-  useEffect(() => {
-    props.getProfile(props.token);
-  }, [getProfile]);
+    getProfile(token);
+    getAllPostsLoginUser(token);
+  }, [getAllPosts, getProfile, getAllPostsLoginUser, token]);
 
   return (
     <React.Fragment>
@@ -74,4 +72,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getAllPosts,getProfile })(Card);
+export default connect(mapStateToProps, { getAllPosts,getProfile, getAllPostsLoginUser })(Card);

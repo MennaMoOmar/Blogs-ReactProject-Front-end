@@ -1,23 +1,32 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
 
-import { getUserById, getProfile, editProfile } from "./../actions";
+import {
+  getProfile,
+  editProfile,
+  getAllPostsLoginUser,
+  getAllPosts,
+} from "./../actions";
+
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import SendIcon from "@material-ui/icons/Send";
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
-import Card from "./card";
-
 const EditProfile = (props) => {
-  const { getUserById, id, token, userProfile } = props;
+  // console.log(props.userPosts);
+  const { token, userProfile, getAllPostsLoginUser } = props;
 
   // useEffect(() => {
   //   getUserById(id);
   // }, [getUserById, id]);
 
   useEffect(() => {
+    getAllPosts();
     getProfile(token);
-  }, [token]);
+    getAllPostsLoginUser(token);
+  }, [token, getAllPostsLoginUser]);
 
   /* hooks */
   const [firstname] = useState();
@@ -32,14 +41,14 @@ const EditProfile = (props) => {
     phone,
     country,
     city,
-    street
+    street,
   });
   const [user, setuser] = useState({
     firstname: userProfile.firstname,
     lastname: userProfile.lastname,
     phone: userProfile.phone,
     country: userProfile.country,
-    city:userProfile.city,
+    city: userProfile.city,
     street: userProfile.street,
     errors,
   });
@@ -116,19 +125,19 @@ const EditProfile = (props) => {
       errors: errors,
     });
   };
-    /* handleChangeCountry */
-    let handleChangeCountry = (e) => {
-      setuser({
-        firstname: user.firstname,
-        lastname: user.lastname,
-        phone: user.phone,
-        country: e.target.value,
-        city: user.city,
-        street: user.street,
-        errors: errors,
-      });
-    };
-      /* handleChangeCity */
+  /* handleChangeCountry */
+  let handleChangeCountry = (e) => {
+    setuser({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      phone: user.phone,
+      country: e.target.value,
+      city: user.city,
+      street: user.street,
+      errors: errors,
+    });
+  };
+  /* handleChangeCity */
   let handleChangeCity = (e) => {
     setuser({
       firstname: user.firstname,
@@ -140,18 +149,18 @@ const EditProfile = (props) => {
       errors: errors,
     });
   };
-    /* handleChangePhone */
-    let handleChangeStreet = (e) => {
-      setuser({
-        firstname: user.firstname,
-        lastname: user.lastname,
-        phone: user.phone,
-        country: user.country,
-        city: user.city,
-        street: e.target.value,
-        errors: errors,
-      });
-    };
+  /* handleChangePhone */
+  let handleChangeStreet = (e) => {
+    setuser({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      phone: user.phone,
+      country: user.country,
+      city: user.city,
+      street: e.target.value,
+      errors: errors,
+    });
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -181,12 +190,16 @@ const EditProfile = (props) => {
             />
           </div>
           <h3 className="editprofile__header__name">
-            {firstname} {lastname}
+            {user.firstname} {user.lastname}
           </h3>
         </div>
         <div className="editprofile__edit">
           <div className="editprofile__frmwrapper">
-            <form className="editprofile__edit__form" action="" onSubmit={submitHandler}>
+            <form
+              className="editprofile__edit__form"
+              action=""
+              onSubmit={submitHandler}
+            >
               <div className="row">
                 <div className="col-lg-6">
                   <input
@@ -200,8 +213,8 @@ const EditProfile = (props) => {
                     name="firstname"
                   />
                   {errors.firstname && (
-                  <div className="text-danger">{errors.firstname}</div>
-                )}
+                    <div className="text-danger">{errors.firstname}</div>
+                  )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -212,8 +225,8 @@ const EditProfile = (props) => {
                     name="phone"
                   />
                   {errors.phone && (
-                  <div className="text-danger">{errors.phone}</div>
-                )}
+                    <div className="text-danger">{errors.phone}</div>
+                  )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -224,8 +237,8 @@ const EditProfile = (props) => {
                     name="city"
                   />
                   {errors.city && (
-                  <div className="text-danger">{errors.city}</div>
-                )}
+                    <div className="text-danger">{errors.city}</div>
+                  )}
                   <label className="editprofile__header__inputupload file-label">
                     <input className="file-input" type="file" name="image" />
                     <span className="register__form__image file-cta">
@@ -247,8 +260,8 @@ const EditProfile = (props) => {
                     name="lastname"
                   />
                   {errors.lastname && (
-                  <div className="text-danger">{errors.lastname}</div>
-                )}
+                    <div className="text-danger">{errors.lastname}</div>
+                  )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -259,8 +272,8 @@ const EditProfile = (props) => {
                     name="country"
                   />
                   {errors.country && (
-                  <div className="text-danger">{errors.country}</div>
-                )}
+                    <div className="text-danger">{errors.country}</div>
+                  )}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
@@ -271,8 +284,8 @@ const EditProfile = (props) => {
                     name="street"
                   />
                   {errors.street && (
-                  <div className="text-danger">{errors.street}</div>
-                )}
+                    <div className="text-danger">{errors.street}</div>
+                  )}
                 </div>
               </div>
               <button className="editprofile__edit__form__btn--save  button is-rounded">
@@ -285,7 +298,53 @@ const EditProfile = (props) => {
           </div>
         </div>
         <div className="editprofile__posts">
-          <Card></Card>
+          {
+          props.userPosts.length===0 ? <h2 className="editprofile__posts__nopost">No Posts</h2>: 
+          props.userPosts.map((post) => {
+            return (
+              <div className="card" key={post._id}>
+                <div className="card__image card-image">
+                  <img src="./logo512.png" alt="" />
+                </div>
+                <div className="card__content card-content">
+                  <div className="card__content__media media">
+                    <div className="media-left">
+                      <figure className="image is-48x48">
+                        <img src="./images/user.png" alt="" />
+                      </figure>
+                    </div>
+                    <div className="media-content">
+                      <p className="card__content__media__title title is-4">
+                        {post.title}
+                      </p>
+                      <div className="card__content__media__name subtitle is-6">
+                        <p>
+                          {user.firstname} {user.lastname}
+                        </p>
+                        {/* <UserName userId={post.userId}></UserName> */}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card__content__describtion content">
+                    <p className="card__content__describtion__para">
+                      {post.body}
+                    </p>
+                  </div>
+                </div>
+                <div className="card__social card-content">
+                  <FavoriteBorderIcon className="card__social__like"></FavoriteBorderIcon>
+                  <input
+                    className="card__social__comment input is-rounded"
+                    type="text"
+                    placeholder="Add Comment"
+                  ></input>
+                  <SendIcon className="card__social__send"></SendIcon>
+                </div>
+              </div>
+            );
+          })
+          }
+          {/* <Card></Card> */}
         </div>
       </div>
     </React.Fragment>
@@ -299,19 +358,29 @@ const mapStateToProps = (state) => {
     id: state.authReducer.userId,
     token: state.authReducer.token,
     userProfile: state.getProfileReducer,
+    userPosts: state.getAllPostsLoginUserReducer,
     // user: state.user.find((u) => u._id === state.authReducer.userId)
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUserById,
+    getAllPosts,
     getProfile,
-    onEditProfile: (token, firstname, lastname, phone, countrty, city, street) =>
-      dispatch(editProfile(token, firstname, lastname, phone, countrty, city, street)),
+    getAllPostsLoginUser,
+    onEditProfile: (
+      token,
+      firstname,
+      lastname,
+      phone,
+      countrty,
+      city,
+      street
+    ) =>
+      dispatch(
+        editProfile(token, firstname, lastname, phone, countrty, city, street)
+      ),
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(
-  EditProfile
-);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
