@@ -35,7 +35,7 @@ const Navbar = (props) => {
           <a className="navbar-brand" href="/">
             <img
               className="navBar__image"
-              src="./images/logo2.png"
+              src="/images/logo2.png"
               alt="logo"
             ></img>
             <span className="navBar__span">Blogs</span>

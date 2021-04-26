@@ -3,17 +3,16 @@ import { connect } from "react-redux";
 
 import { getUserById, getAllPostsByUserId } from "./../actions";
 
-// import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-// import SendIcon from "@material-ui/icons/Send";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import SendIcon from "@material-ui/icons/Send";
 
-// import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 const ShowProfile = (props) => {
-  console.log(props.user);
   console.log(props.posts);
 
   const id = props.match.params.id;
-  const { getUserById, getAllPostsByUserId, user } = props;
+  const { getUserById, getAllPostsByUserId, user, posts } = props;
 
   useEffect(() => {
     getUserById(id);
@@ -27,12 +26,12 @@ const ShowProfile = (props) => {
           <div className="editprofile__header__image">
             <img
               className="editprofile__header__image__img"
-              src="./images/user.png"
+              src="/images/user.png"
               alt=""
             />
           </div>
           <h3 className="editprofile__header__name">
-            {"" && user.firstname} {"" && user.lastname}
+            {user.firstname} {user.lastname}
           </h3>
         </div>
         <div className="editprofile__edit">
@@ -40,23 +39,28 @@ const ShowProfile = (props) => {
             <form className="editprofile__edit__form">
               <div className="row">
                 <div className="col-lg-6">
+                  {/* <span>First Name</span>
+                  <span>{user.firstname}</span> */}
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="First Name"
-                    value={"" && user.firstname}
+                    value={user.firstname}
+                    disabled
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Phone"
-                    value={"" && user.phone}
+                    value={user.phone}
+                    disabled
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="City"
-                    value={"" && user.city}
+                    value={user.city}
+                    disabled
                   />
                 </div>
                 <div className="col-lg-6">
@@ -64,39 +68,42 @@ const ShowProfile = (props) => {
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Last Name"
-                    value={"" && user.lastname}
+                    value={user.lastname}
+                    disabled
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Country"
-                    value={"" && user.country}
+                    value={user.country}
+                    disabled
                   />
                   <input
                     className="editprofile__edit__form__input input is-link"
                     type="text"
                     placeholder="Street"
-                    value={"" && user.street}
+                    value={user.street}
+                    disabled
                   />
                 </div>
               </div>
             </form>
           </div>
         </div>
-        {/* <div className="editprofile__posts">
+        <div className="editprofile__posts">
           {
-          props.userPosts.length===0 ? <h2 className="editprofile__posts__nopost">No Posts</h2>: 
-          props.userPosts.map((post) => {
+          posts.length===0 ? <h2 className="editprofile__posts__nopost">No Posts</h2>: 
+          posts.map((post) => {
             return (
               <div className="card" key={post._id}>
                 <div className="card__image card-image">
-                  <img src="./logo512.png" alt="" />
+                  <img src="/logo512.png" alt="" />
                 </div>
                 <div className="card__content card-content">
                   <div className="card__content__media media">
                     <div className="media-left">
                       <figure className="image is-48x48">
-                        <img src="./images/user.png" alt="" />
+                        <img src="/images/user.png" alt="" />
                       </figure>
                     </div>
                     <div className="media-content">
@@ -129,7 +136,7 @@ const ShowProfile = (props) => {
             );
           })
         } 
-        </div>*/}
+        </div>
       </div>
     </React.Fragment>
   );
@@ -138,10 +145,10 @@ const ShowProfile = (props) => {
 // mapStateToProps
 const mapStateToProps = (state, props) => {
     console.log(state)
-    console.log(props)
+    // console.log(props)
   return {
     user: state.user.find((u) => u._id === props.match.params.id),
-    posts: state.posts.find((p) => p.userId === props.match.params.id),
+    posts: state.posts.filter((p) => p.userId === props.match.params.id),
   };
 };
 

@@ -1,19 +1,28 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
 import { getUserById } from "../actions";
 
 const UserName = (props) => {
+  /* history */
+  const history = useHistory();
+
   const { getUserById, userId, user } = props;
 
   useEffect(() => {
     getUserById(userId);
   }, [getUserById, userId]);
 
+  const handleShowProfile = () => {
+    console.log(userId);
+    history.push(`/showprofile/${userId}`);
+  };
+
   if (!user) return "Loading...";
 
   return (
-    <p>
+    <p onClick={(userId) => handleShowProfile()}>
       {props.user.firstname} {props.user.lastname}
     </p>
   );
