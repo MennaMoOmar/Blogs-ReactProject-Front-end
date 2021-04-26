@@ -1,21 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 
-import { logout } from "./../actions";
+import { logout, getProfile } from "./../actions";
 
 const Navbar = (props) => {
   /* history */
   const history = useHistory();
-  console.log(props);
-  
-  // const {token, id} = props;
-  // useEffect(() => {
-  //   getProfile(token)
-  //   getAllPostsLoginUser(token)
-  //   getUserById(id)
-  // }, [token,id]);
+
+  const { token, getProfile, userProfile } = props;
+  useEffect(() => {
+    getProfile(token);
+  }, [getProfile, token]);
 
   const loginLogout = () => {
     if (props.token) {
@@ -95,7 +92,10 @@ const Navbar = (props) => {
           {props.token && (
             <span>
               <NavLink className="navBar__auth__editprofile" to="/editprofile">
-                <i className="far fa-user"></i> Profile
+                <div className="navBar__auth__editprofile__userimg">
+                <img src="./images/user.png" alt="" />
+                </div>
+                {userProfile.firstname} {userProfile.lastname}
               </NavLink>
             </span>
           )}
@@ -116,7 +116,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.authReducer.token,
     id: state.authReducer.userId,
+    userProfile: state.getProfileReducer,
   };
 };
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout, getProfile })(Navbar);

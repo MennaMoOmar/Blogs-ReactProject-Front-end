@@ -57,6 +57,17 @@
             &:hover{
                 text-decoration: none;
             }
+            &__userimg{
+                display: inline-block;
+                border: 2px solid $colPurple;
+                border-radius: 50%;
+                padding: .2rem;
+                margin-right: .5rem;
+                img{
+                    width: 30px;
+                    height: 30px;
+                }
+            }
         }
     }
 }

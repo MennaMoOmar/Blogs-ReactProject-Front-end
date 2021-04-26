@@ -6,8 +6,6 @@ import { getUserById, getAllPostsByUserId } from "./../actions";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SendIcon from "@material-ui/icons/Send";
 
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-
 const ShowProfile = (props) => {
 
   const id = props.match.params.id;
