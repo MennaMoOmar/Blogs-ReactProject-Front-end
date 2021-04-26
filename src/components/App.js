@@ -12,6 +12,7 @@ import JoinUs from "./joinus"
 import EditProfile from "./editProfile"
 import LoginPage from "./loginpage"
 import RegisterPage from "./registerpage"
+import ShowProfile from "./showProfile"
 import NotFound from "./notFound"
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/loginpage" component={LoginPage} />
             <Route path="/registerpage" component={RegisterPage} />
             <Route path="/editprofile" component={EditProfile} />
+            <Route path="/showprofile/:id" component={ShowProfile} />
             <Route path="/notfound" component={NotFound} />
             <Route path="/home" component={Home} />
             <Redirect from="/" exact to="/home" />
