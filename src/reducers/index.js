@@ -11,6 +11,7 @@ import getAllPostsLoginUserReducer from "./getAllPostsLoginUserReducer";
 import getAllPostsByUserIdReducer from "./getAllPostsByUserIdReducer";
 import getPostByIdReducer from "./getPostByIdReducer";
 import editPostByIdReducer from "./editPostByIdReducer";
+import deletePostByIdReducer from "./deletePostByIdReducer";
 
 const rootReducer = combineReducers({
     posts: getAllPostsReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     getAllPostsLoginUserReducer: getAllPostsLoginUserReducer,
     getAllPostsByUserIdReducer: getAllPostsByUserIdReducer,
     getPostByIdReducer: getPostByIdReducer,
-    editPostByIdReducer: editPostByIdReducer
+    editPostByIdReducer: editPostByIdReducer,
+    deletePostByIdReducer: deletePostByIdReducer
 });
 export default rootReducer;

@@ -14,7 +14,7 @@ const CreatePostBtn = () => {
     <React.Fragment>
       <div className="addPostBtn" onClick={addPostHandler}>
         <div className="addPostBtn__content">
-          <i class="fas fa-feather-alt"></i>
+          <i className="fas fa-feather-alt"></i>
           <span> Create Post</span>
         </div>
       </div>

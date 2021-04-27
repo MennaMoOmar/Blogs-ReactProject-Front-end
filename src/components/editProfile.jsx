@@ -8,6 +8,7 @@ import {
   editProfile,
   getAllPostsLoginUser,
   getAllPosts,
+  deletePost
 } from "./../actions";
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
@@ -158,6 +159,11 @@ const EditProfile = (props) => {
     });
   };
 
+  const handlerDeletePost=(postId)=>{
+    console.log(postId)
+    props.onDeletePost(postId)
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
     props.onEditProfile(
@@ -305,7 +311,7 @@ const EditProfile = (props) => {
             props.userPosts.map((post) => {
               return (
                 <div className="card" key={post._id}>
-                  <button class="delete card__deletebtn is-large"></button>
+                  <button class="delete card__deletebtn is-large" onClick={()=>{handlerDeletePost(post._id)}}></button>
                   <div className="card__image card-image">
                     <img src="./logo512.png" alt="" />
                   </div>
@@ -369,6 +375,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllPosts,
     getProfile,
     getAllPostsLoginUser,
+    onDeletePost: (postId)=>dispatch(deletePost(postId)),
     onEditProfile: (
       token,
       firstname,
