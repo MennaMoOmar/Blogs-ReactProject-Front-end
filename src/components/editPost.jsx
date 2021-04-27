@@ -5,18 +5,16 @@ import { useHistory } from "react-router";
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
-import { getPostById } from "./../actions";
+import { getPostById, editPost } from "./../actions";
 
 const EditPost = (props) => {
 
-  console.log(props.userPost)
-
-  const id = props.match.params.id;
-  const { getPostById, userPost } = props;
+  const postId = props.match.params.id;
+  const { getPostById, userPost, token } = props;
 
   useEffect(() => {
-    getPostById(id);
-  }, [getPostById, id]);
+    getPostById(postId);
+  }, [getPostById, postId]);
 
   /* hooks */
   const [title] = useState();
@@ -33,8 +31,8 @@ const EditPost = (props) => {
 
   /* schema */
   const schema = {
-    title: joi.string().alphanum().min(5).max(20).required(),
-    body: joi.string().alphanum().min(5).max(200).required(),
+    title: joi.string().min(5).max(20).required(),
+    body: joi.string().min(5).max(200).required(),
   };
 
   /* validate */
@@ -63,7 +61,7 @@ const EditPost = (props) => {
   let handleChangeTitle = (e, value) => {
     setpost({
       title: e.target.value,
-      body: post.lastname,
+      body: post.body,
       errors: errors,
     });
   };
@@ -75,16 +73,18 @@ const EditPost = (props) => {
       errors: errors,
     });
   };
- 
+
   const submitHandler = (e) => {
+    console.log(postId)
     e.preventDefault();
-    // props.onEditPost(
-    //   postId,
-    //   post.title,
-    //   post.body,
-    // );
-    // const errorr = validate();
-    // if (errorr) return;
+    props.onEditPost(
+      token,
+      postId,
+      post.title,
+      post.body,
+    );
+    const errorr = validate();
+    if (errorr) return;
     // history.push("/blogs");
   };
 
@@ -114,6 +114,9 @@ const EditPost = (props) => {
                   onChange={handleChangeTitle}
                   value={post.title}
                 />
+                {errors.title && (
+                  <div className="text-danger">{errors.title}</div>
+                )}
                 {/* <label className="addPost__form__label">body</label> */}
                 <textarea
                   className="addPost__form__textarea input is-link"
@@ -124,6 +127,9 @@ const EditPost = (props) => {
                   onChange={handleChangeBody}
                   value={post.body}
                 ></textarea>
+                {errors.body && (
+                  <div className="text-danger">{errors.body}</div>
+                )}
               </div>
             </div>
             <button className="addPost__form__btn--save  button is-rounded">
@@ -141,8 +147,24 @@ const mapStateToProps = (state, props) => {
   // console.log(state)
   // console.log(props)
   return {
+    token: state.authReducer.token,
     userPost: state.posts.filter((p) => p._id === props.match.params.id),
   };
 };
 
-export default connect(mapStateToProps, { getPostById })(EditPost);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getPostById,
+    onEditPost: (
+      token,
+      postId,
+      title,
+      body
+    ) =>
+      dispatch(
+        editPost(token, postId, title, body)
+      ),
+  };
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditPost);
