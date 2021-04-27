@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
+import { useHistory } from "react-router";
 
 import {
   getProfile,
@@ -12,12 +13,10 @@ import {
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 const EditProfile = (props) => {
-  // console.log(props.userPosts);
-  const { token, userProfile, getAllPostsLoginUser } = props;
+  /* history */
+  const history = useHistory();
 
-  // useEffect(() => {
-  //   getUserById(id);
-  // }, [getUserById, id]);
+  const { token, userProfile, getAllPostsLoginUser } = props;
 
   useEffect(() => {
     getAllPosts();
@@ -175,6 +174,11 @@ const EditProfile = (props) => {
     // history.push("/blogs");
   };
 
+  const HandlerEditPost = (id) => {
+    // console.log(id);
+    history.push(`/editpost/${id}`);
+  };
+
   return (
     <React.Fragment>
       <div className="editprofile container">
@@ -294,12 +298,6 @@ const EditProfile = (props) => {
             </form>
           </div>
         </div>
-        {/* <div className="editprofile__posts__add">
-          <button>
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-        <AddPost></AddPost> */}
         <div className="editprofile__posts">
           {props.userPosts.length === 0 ? (
             <h2 className="editprofile__posts__nopost">No Posts</h2>
@@ -326,7 +324,6 @@ const EditProfile = (props) => {
                           <p>
                             {user.firstname} {user.lastname}
                           </p>
-                          {/* <UserName userId={post.userId}></UserName> */}
                         </div>
                       </div>
                     </div>
@@ -337,7 +334,12 @@ const EditProfile = (props) => {
                     </div>
                   </div>
                   <div className="card__social card-content">
-                    <button class="button is-success is-rounded card__social__edit"><i class="far fa-edit"></i> Edit</button>
+                    <button
+                      class="button is-success is-rounded card__social__edit"
+                      onClick={()=>HandlerEditPost(post._id)}
+                    >
+                      <i class="far fa-edit"></i> Edit
+                    </button>
                   </div>
                 </div>
               );
