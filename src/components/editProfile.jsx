@@ -294,11 +294,12 @@ const EditProfile = (props) => {
             </form>
           </div>
         </div>
-        <div className="editprofile__posts__add">
+        {/* <div className="editprofile__posts__add">
           <button>
             <i class="fas fa-plus"></i>
           </button>
         </div>
+        <AddPost></AddPost> */}
         <div className="editprofile__posts">
           {props.userPosts.length === 0 ? (
             <h2 className="editprofile__posts__nopost">No Posts</h2>

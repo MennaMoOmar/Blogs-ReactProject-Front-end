@@ -13,17 +13,17 @@ import EditProfile from "./editProfile"
 import LoginPage from "./loginpage"
 import RegisterPage from "./registerpage"
 import ShowProfile from "./showProfile"
+import AddPost from "./addPost"
+import CreatePostbtn from "./createPostbtn"
 import NotFound from "./notFound"
 
 const App = () => {
-  // console.log(window.location.replace("/blogs"))
   return (
     <>
       <Navbar/>
       <main>
         <Switch>
             <Route path="/about" component={About} />
-            {/* <Route path="/blogs"  render={(props) => <Blogs {...props}/>} /> */}
             <Route path="/blogs" component={Blogs} />
             <Route path="/contactus" component={ContactUs} />
             <Route path="/joinus" component={JoinUs} />
@@ -31,6 +31,8 @@ const App = () => {
             <Route path="/registerpage" component={RegisterPage} />
             <Route path="/editprofile" component={EditProfile} />
             <Route path="/showprofile/:id" component={ShowProfile} />
+            <Route path="/createpostbtn" component={CreatePostbtn} />
+            <Route path="/addpost" component={AddPost} />
             <Route path="/notfound" component={NotFound} />
             <Route path="/home" component={Home} />
             <Redirect from="/" exact to="/home" />
