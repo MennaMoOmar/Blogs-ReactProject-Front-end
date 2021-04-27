@@ -95,7 +95,7 @@ const Navbar = (props) => {
               <CreatePostBtn></CreatePostBtn>
               <NavLink className="navBar__auth__editprofile" to="/editprofile">
                 <div className="navBar__auth__editprofile__userimg">
-                <img src="./images/user.png" alt="" />
+                <img src="/images/user.png" alt="" />
                 </div>
                 {userProfile.firstname} {userProfile.lastname}
               </NavLink>
