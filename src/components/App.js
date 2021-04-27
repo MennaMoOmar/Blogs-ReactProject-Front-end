@@ -14,6 +14,7 @@ import LoginPage from "./loginpage"
 import RegisterPage from "./registerpage"
 import ShowProfile from "./showProfile"
 import AddPost from "./addPost"
+import EditPost from "./editPost"
 import CreatePostbtn from "./createPostbtn"
 import NotFound from "./notFound"
 
@@ -33,6 +34,7 @@ const App = () => {
             <Route path="/showprofile/:id" component={ShowProfile} />
             <Route path="/createpostbtn" component={CreatePostbtn} />
             <Route path="/addpost" component={AddPost} />
+            <Route path="/editpost/:id" component={EditPost} />
             <Route path="/notfound" component={NotFound} />
             <Route path="/home" component={Home} />
             <Redirect from="/" exact to="/home" />
