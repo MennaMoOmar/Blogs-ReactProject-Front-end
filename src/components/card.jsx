@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { getAllPosts, getProfile, getAllPostsLoginUser } from "./../actions"
 import UserName from "./userName"
+import URI from "../apis/URI";
 
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SendIcon from "@material-ui/icons/Send";
@@ -23,13 +24,14 @@ const Card = (props) => {
         return (
           <div className="card" key={post._id}>
             <div className="card__image card-image">
-              <img src="./logo512.png" alt="" />
+              {/* <img src="./logo512.png" alt="" /> */}
+              <img src={URI + "/post/postImg/" + post._id} alt="" />
             </div>
             <div className="card__content card-content">
               <div className="card__content__media media">
                 <div className="media-left">
                   <figure className="image is-48x48">
-                    <img src="./images/user.png" alt="" />
+                    <img src={URI + "/user/profileImg/" + post.userId} alt="" />
                   </figure>
                 </div>
                 <div className="media-content">

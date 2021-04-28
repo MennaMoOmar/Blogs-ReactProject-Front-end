@@ -10,8 +10,10 @@ import {
   getAllPosts,
   deletePost
 } from "./../actions";
+import URI from '../apis/URI';
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
+
 
 const EditProfile = (props) => {
   /* history */
@@ -190,9 +192,10 @@ const EditProfile = (props) => {
       <div className="editprofile container">
         <div className="editprofile__header">
           <div className="editprofile__header__image">
+            {console.log(typeof parseInt(userProfile._id))}
             <img
               className="editprofile__header__image__img"
-              src="./images/user.png"
+              src={URI+"/user/profileImg/"+(userProfile._id)}
               alt=""
             />
           </div>

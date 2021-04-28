@@ -4,13 +4,14 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router";
 
 import { logout, getProfile } from "./../actions";
-import CreatePostBtn from "./createPostbtn"
+import CreatePostBtn from "./createPostbtn";
+import URI from "../apis/URI";
 
 const Navbar = (props) => {
   /* history */
   const history = useHistory();
 
-  const { token, getProfile, userProfile } = props;
+  const { token, getProfile, userProfile, id } = props;
   useEffect(() => {
     getProfile(token);
   }, [getProfile, token]);
@@ -95,7 +96,8 @@ const Navbar = (props) => {
               <CreatePostBtn></CreatePostBtn>
               <NavLink className="navBar__auth__editprofile" to="/editprofile">
                 <div className="navBar__auth__editprofile__userimg">
-                <img src="/images/user.png" alt="" />
+                  {/* <img src="/images/user.png" alt="" /> */}
+                  <img src={URI + "/user/profileImg/" + id} alt="" />
                 </div>
                 {userProfile.firstname} {userProfile.lastname}
               </NavLink>
