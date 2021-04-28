@@ -63,7 +63,6 @@ const Card = (props) => {
 
 // mapStateToProps
 const mapStateToProps = (state) => {
-  // console.log(state);
   return {
     posts: state.posts,
     token: state.authReducer.token,
