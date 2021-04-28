@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getAllPosts, getProfile, getAllPostsLoginUser } from "./../actions"
-import UserName from "./userName"
+import { getAllPosts, getProfile, getAllPostsLoginUser } from "./../actions";
+import UserName from "./userName";
 import URI from "../apis/URI";
 
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SendIcon from "@material-ui/icons/Send";
 
 const Card = (props) => {
-
   const { getAllPosts, getProfile, getAllPostsLoginUser, token } = props;
-  
+
   useEffect(() => {
     getAllPosts();
     getProfile(token);
@@ -24,7 +23,6 @@ const Card = (props) => {
         return (
           <div className="card" key={post._id}>
             <div className="card__image card-image">
-              {/* <img src="./logo512.png" alt="" /> */}
               <img src={URI + "/post/postImg/" + post._id} alt="" />
             </div>
             <div className="card__content card-content">
@@ -39,14 +37,12 @@ const Card = (props) => {
                     {post.title}
                   </p>
                   <div className="card__content__media__name subtitle is-6">
-                  <UserName userId={post.userId}></UserName>
+                    <UserName userId={post.userId}></UserName>
                   </div>
                 </div>
               </div>
               <div className="card__content__describtion content">
-                <p className="card__content__describtion__para">
-                  {post.body}
-                </p>
+                <p className="card__content__describtion__para">{post.body}</p>
               </div>
             </div>
             <div className="card__social card-content">
@@ -74,4 +70,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { getAllPosts,getProfile, getAllPostsLoginUser })(Card);
+export default connect(mapStateToProps, {
+  getAllPosts,
+  getProfile,
+  getAllPostsLoginUser,
+})(Card);
