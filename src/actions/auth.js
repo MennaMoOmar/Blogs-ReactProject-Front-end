@@ -51,6 +51,7 @@ export const auth = (username, password) => async (dispatch) => {
     .then((response) => {
       dispatch(authSuccess(response.data.token, response.data.user._id));
       dispatch(checkAuthTimeout(3600*1000)); //logout after 1h
+      localStorage.setItem('token',response.data.token)
     })
     .catch((err) => {
       dispatch(authFail(err.response.data.error));

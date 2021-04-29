@@ -13,8 +13,8 @@ const Card = (props) => {
 
   useEffect(() => {
     getAllPosts();
-    getProfile(token);
-    getAllPostsLoginUser(token);
+    // getProfile(token);
+    // getAllPostsLoginUser(token);
   }, [getAllPosts, getProfile, getAllPostsLoginUser, token]);
 
    // onImageError

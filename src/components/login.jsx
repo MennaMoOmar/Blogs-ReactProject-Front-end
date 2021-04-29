@@ -76,6 +76,9 @@ const Login = (props) => {
     //   history.push('/blogs')
     //   localStorage.setItem('token',props.token)
     // }
+    if(localStorage.getItem('token')){
+      history.push('/blogs')
+    }
   };
 
   /* error message*/
@@ -87,10 +90,6 @@ const Login = (props) => {
 
   return (
     <React.Fragment>
-      {props.token&&
-      history.push('/blogs')
-      
-      }
       <div className="login">
         <div className="container">
           <h2 className="login__header">login</h2>

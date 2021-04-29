@@ -13,16 +13,16 @@ const Navbar = (props) => {
 
   const { token, getProfile, userProfile, id } = props;
   useEffect(() => {
-    getProfile(token);
+    if (localStorage.getItem("token")) {
+      getProfile(token);
+    }
   }, [getProfile, token]);
 
   const loginLogout = () => {
     if (props.token) {
-      console.log("token exist");
       history.push("/");
       props.logout();
     } else {
-      console.log("no token");
       history.push("/loginpage");
     }
   };
@@ -101,7 +101,6 @@ const Navbar = (props) => {
               <CreatePostBtn></CreatePostBtn>
               <NavLink className="navBar__auth__editprofile" to="/editprofile">
                 <div className="navBar__auth__editprofile__userimg">
-                  {/* <img src="/images/user.png" alt="" /> */}
                   <img
                     src={URI + "/user/profileImg/" + id}
                     alt=""
@@ -125,7 +124,6 @@ const Navbar = (props) => {
 
 /* mapStateToProps */
 const mapStateToProps = (state) => {
-  // console.log(state);
   return {
     token: state.authReducer.token,
     id: state.authReducer.userId,
