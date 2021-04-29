@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
 import { useHistory } from "react-router";
+import { ToastContainer } from "react-toastify";
 
 import { auth } from "./../actions";
 import Spinner from "./spinner";
@@ -76,26 +77,20 @@ const Login = (props) => {
     //   history.push('/blogs')
     //   localStorage.setItem('token',props.token)
     // }
-    if(localStorage.getItem('token')){
-      history.push('/blogs')
+    if (localStorage.getItem("token")) {
+      history.push("/blogs");
     }
   };
-
-  /* error message*/
-  let errorMessage = null;
-  // console.log(props.error)
-  if(props.error){
-    errorMessage = (<h1>hdudhuh</h1>)
-  }
 
   return (
     <React.Fragment>
       <div className="login">
+        <ToastContainer />
         <div className="container">
           <h2 className="login__header">login</h2>
           <div className="login__frmwrapper">
-            {errorMessage}
-            {<Spinner></Spinner> &&
+            {/* {errorMessage} */}
+            {<Spinner></Spinner> && (
               <form className="login__form" action="" onSubmit={submitHandler}>
                 {/* email */}
                 <div className="field">
@@ -158,7 +153,7 @@ const Login = (props) => {
                   Login
                 </button>
               </form>
-            }
+            )}
           </div>
         </div>
       </div>
@@ -168,11 +163,10 @@ const Login = (props) => {
 
 /* mapStateToProps */
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
     loading: state.authReducer.loading,
     error: state.authReducer.error,
-    token :state.authReducer.token
+    token: state.authReducer.token,
   };
 };
 /* mapDispatchToProps */

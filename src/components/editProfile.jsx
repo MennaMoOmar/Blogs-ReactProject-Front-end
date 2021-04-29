@@ -367,7 +367,7 @@ const EditProfile = (props) => {
               return (
                 <div className="card" key={post._id}>
                   <button
-                    class="delete card__deletebtn is-large"
+                    className="delete card__deletebtn is-large"
                     onClick={() => {
                       handlerDeletePost(post._id);
                     }}
