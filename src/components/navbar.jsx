@@ -27,6 +27,11 @@ const Navbar = (props) => {
     }
   };
 
+  // onImageError
+  const onImageError = (e) => {
+    e.target.src = "/images/user.png";
+  };
+
   return (
     <React.Fragment>
       <nav className="navBar navbar navbar-expand-lg">
@@ -97,7 +102,11 @@ const Navbar = (props) => {
               <NavLink className="navBar__auth__editprofile" to="/editprofile">
                 <div className="navBar__auth__editprofile__userimg">
                   {/* <img src="/images/user.png" alt="" /> */}
-                  <img src={URI + "/user/profileImg/" + id} alt="" />
+                  <img
+                    src={URI + "/user/profileImg/" + id}
+                    alt=""
+                    onError={onImageError}
+                  />
                 </div>
                 {userProfile.firstname} {userProfile.lastname}
               </NavLink>

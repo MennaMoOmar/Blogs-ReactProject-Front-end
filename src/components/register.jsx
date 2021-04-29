@@ -5,8 +5,6 @@ import { useHistory } from "react-router";
 
 import { register } from "./../actions";
 
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-
 const Register = (props) => {
 
   // console.log(props.onRegister())
@@ -309,18 +307,17 @@ const Register = (props) => {
                 </p>
               </div>
               {/* image */}
-              <div className="is-info">
+              {/* <div className="is-info">
                 <label className="file-label">
                   <input className="file-input" type="file" name="image" />
                   <span className="register__form__image file-cta">
                     <span className="file-icon">
-                      {/* <i className="fas fa-upload"></i> */}
                       <PhotoCameraIcon></PhotoCameraIcon>
                     </span>
                     <span className="file-label">Upload Image</span>
                   </span>
                 </label>
-              </div>
+              </div> */}
               {/* button */}
               <button className="register__form__register blogs__morebtn button is-rounded">
                 Register

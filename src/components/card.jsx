@@ -17,6 +17,11 @@ const Card = (props) => {
     getAllPostsLoginUser(token);
   }, [getAllPosts, getProfile, getAllPostsLoginUser, token]);
 
+   // onImageError
+   const onImageError = (e) => {
+    e.target.src = "/images/user.png";
+  };
+
   return (
     <React.Fragment>
       {props.posts.map((post) => {
@@ -29,7 +34,7 @@ const Card = (props) => {
               <div className="card__content__media media">
                 <div className="media-left">
                   <figure className="image is-48x48">
-                    <img src={URI + "/user/profileImg/" + post.userId} alt="" />
+                    <img src={URI + "/user/profileImg/" + post.userId} alt="" onError={onImageError} />
                   </figure>
                 </div>
                 <div className="media-content">

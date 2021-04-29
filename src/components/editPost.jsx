@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
-import { useHistory } from "react-router";
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
@@ -15,7 +14,7 @@ const EditPost = (props) => {
   useEffect(() => {
     getPostById(postId);
   }, [getPostById, postId]);
-
+  
   /* hooks */
   const [title] = useState();
   const [body] = useState();

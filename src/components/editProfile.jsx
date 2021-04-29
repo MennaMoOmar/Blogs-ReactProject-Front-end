@@ -13,8 +13,6 @@ import {
 } from "./../actions";
 import URI from "../apis/URI";
 
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-
 const EditProfile = (props) => {
   /* history */
   const history = useHistory();
@@ -162,11 +160,13 @@ const EditProfile = (props) => {
     });
   };
 
+  // handlerDeletePost
   const handlerDeletePost = (postId) => {
     console.log(postId);
     props.onDeletePost(postId);
   };
 
+  // submitHandler
   const submitHandler = (e) => {
     e.preventDefault();
     props.onEditProfile(
@@ -180,7 +180,7 @@ const EditProfile = (props) => {
     );
     const errorr = validate();
     if (errorr) return;
-
+    // image
     const formData = new FormData();
     formData.append("profileImage", image, image.name);
     console.log(formData.get("profileImage").name);
@@ -211,9 +211,15 @@ const EditProfile = (props) => {
     history.push(`/editpost/${id}`);
   };
 
+  // fileSelectHandler
   const fileSelectHandler = async (e) => {
     await setImage(e.target.files[0]);
   };
+
+  // onImageError
+  const onImageError = (e) => {
+    e.target.src = '/images/user.png';
+  }
 
   return (
     <React.Fragment>
@@ -224,6 +230,7 @@ const EditProfile = (props) => {
               className="editprofile__header__image__img"
               src={URI + "/user/profileImg/" + userProfile._id}
               alt=""
+              onError={onImageError}
             />
             <label htmlFor="file">
               <i className="editprofile__header__camera fas fa-camera-retro"></i>
