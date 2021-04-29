@@ -5,6 +5,19 @@
     gap: 0.5rem;
     padding: 2rem 0rem;
     border-bottom: 2px solid $colPurple;
+    &__camera{
+      color: $colPurple;
+      position: relative;
+      top: -20px;
+      left: -20px;
+      font-size: 2rem;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+    &__image>.imageUpload{
+      display: none;
+    }
     &__image {
       text-align: center;
       &__img {
@@ -15,9 +28,7 @@
       }
     }
     // &__inputupload {
-    //   text-align: center;
-    //   background-color: #ffffff;
-    //   color: #9381ff;
+    //   display: none;
     // }
     &__name {
       color: $colPurple;

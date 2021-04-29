@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
 import { useHistory } from "react-router";
+import axios from "axios";
 
 import {
   getProfile,
   editProfile,
   getAllPostsLoginUser,
   getAllPosts,
-  deletePost
+  deletePost,
 } from "./../actions";
-import URI from '../apis/URI';
+import URI from "../apis/URI";
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-
 
 const EditProfile = (props) => {
   /* history */
@@ -34,6 +34,7 @@ const EditProfile = (props) => {
   const [country] = useState();
   const [city] = useState();
   const [street] = useState();
+  let [image, setImage] = useState(null);
   const [errors, setErrors] = useState({
     firstname,
     lastname,
@@ -161,10 +162,10 @@ const EditProfile = (props) => {
     });
   };
 
-  const handlerDeletePost=(postId)=>{
-    console.log(postId)
-    props.onDeletePost(postId)
-  }
+  const handlerDeletePost = (postId) => {
+    console.log(postId);
+    props.onDeletePost(postId);
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -179,7 +180,30 @@ const EditProfile = (props) => {
     );
     const errorr = validate();
     if (errorr) return;
-    // history.push("/blogs");
+
+    const formData = new FormData();
+    formData.append("profileImage", image, image.name);
+    console.log(formData.get("profileImage").name);
+    const headerData = {
+      headers: {
+        Authorization: token,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    axios
+      .post("http://localhost:3001/user/profileImg", formData, headerData, {
+        onUploadProgress: (progressEvent) => {
+          console.log(
+            "Upload Progress: " +
+              (Math.round((progressEvent.loaded / progressEvent.total) * 100) +
+                "%")
+          );
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   const HandlerEditPost = (id) => {
@@ -187,16 +211,30 @@ const EditProfile = (props) => {
     history.push(`/editpost/${id}`);
   };
 
+  const fileSelectHandler = async (e) => {
+    await setImage(e.target.files[0]);
+  };
+
   return (
     <React.Fragment>
       <div className="editprofile container">
         <div className="editprofile__header">
           <div className="editprofile__header__image">
-            {console.log(typeof parseInt(userProfile._id))}
             <img
               className="editprofile__header__image__img"
-              src={URI+"/user/profileImg/"+(userProfile._id)}
+              src={URI + "/user/profileImg/" + userProfile._id}
               alt=""
+            />
+            <label htmlFor="file">
+              <i className="editprofile__header__camera fas fa-camera-retro"></i>
+            </label>
+            <input
+              id="file"
+              className="imageUpload"
+              type="file"
+              name="file"
+              accept=".png, .jpg"
+              onChange={fileSelectHandler}
             />
           </div>
           <h3 className="editprofile__header__name">
@@ -249,15 +287,22 @@ const EditProfile = (props) => {
                   {errors.city && (
                     <div className="text-danger">{errors.city}</div>
                   )}
-                  <label className="editprofile__header__inputupload file-label">
-                    <input className="file-input" type="file" name="image" />
+                  {/* <label className="editprofile__header__inputupload file-label">
+                    <input
+                      className="file-input"
+                      type="file"
+                      name="file"
+                      accept=".png, .jpg"
+                      onChange={fileSelectHandler}
+                      ref = {image => {image = image}}
+                    />
                     <span className="register__form__image file-cta">
                       <span className="file-icon">
                         <PhotoCameraIcon></PhotoCameraIcon>
                       </span>
                       <span className="file-label">Change Image</span>
                     </span>
-                  </label>
+                  </label> */}
                 </div>
                 <div className="col-lg-6">
                   <input
@@ -314,15 +359,23 @@ const EditProfile = (props) => {
             props.userPosts.map((post) => {
               return (
                 <div className="card" key={post._id}>
-                  <button class="delete card__deletebtn is-large" onClick={()=>{handlerDeletePost(post._id)}}></button>
+                  <button
+                    class="delete card__deletebtn is-large"
+                    onClick={() => {
+                      handlerDeletePost(post._id);
+                    }}
+                  ></button>
                   <div className="card__image card-image">
-                    <img src="./logo512.png" alt="" />
+                    <img src={URI + "/post/postImg/" + post._id} alt="" />
                   </div>
                   <div className="card__content card-content">
                     <div className="card__content__media media">
                       <div className="media-left">
                         <figure className="image is-48x48">
-                          <img src="./images/user.png" alt="" />
+                          <img
+                            src={URI + "/user/profileImg/" + userProfile._id}
+                            alt=""
+                          />
                         </figure>
                       </div>
                       <div className="media-content">
@@ -345,7 +398,7 @@ const EditProfile = (props) => {
                   <div className="card__social card-content">
                     <button
                       class="button is-success is-rounded card__social__edit"
-                      onClick={()=>HandlerEditPost(post._id)}
+                      onClick={() => HandlerEditPost(post._id)}
                     >
                       <i class="far fa-edit"></i> Edit
                     </button>
@@ -378,7 +431,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllPosts,
     getProfile,
     getAllPostsLoginUser,
-    onDeletePost: (postId)=>dispatch(deletePost(postId)),
+    onDeletePost: (postId) => dispatch(deletePost(postId)),
     onEditProfile: (
       token,
       firstname,
