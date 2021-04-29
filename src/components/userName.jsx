@@ -15,7 +15,6 @@ const UserName = (props) => {
   }, [getUserById, userId]);
 
   const handleShowProfile = () => {
-    console.log(userId);
     history.push(`/showprofile/${userId}`);
   };
 

@@ -404,10 +404,10 @@ const EditProfile = (props) => {
                   </div>
                   <div className="card__social card-content">
                     <button
-                      class="button is-success is-rounded card__social__edit"
+                      className="button is-success is-rounded card__social__edit"
                       onClick={() => HandlerEditPost(post._id)}
                     >
-                      <i class="far fa-edit"></i> Edit
+                      <i className="far fa-edit"></i> Edit
                     </button>
                   </div>
                 </div>
@@ -437,7 +437,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllPosts,
     getProfile,
-    getAllPostsLoginUser,
+    getAllPostsLoginUser: (token)=>dispatch(getAllPostsLoginUser(token)),
     onDeletePost: (postId) => dispatch(deletePost(postId)),
     onEditProfile: (
       token,
