@@ -70,7 +70,7 @@ const AddPost = (props) => {
 
   // fileSelectHandler
   const fileSelectHandler = async (e) => {
-    console.log("huhu")
+    console.log("huhu");
     setImage(e.target.files[0]);
   };
 
@@ -93,20 +93,19 @@ const AddPost = (props) => {
               <div className="col-lg-12">
                 {/* <label className="addPost__form__label">Image</label> */}
                 <label className="addPost__form__inputupload file-label">
-                  <span className="addPost__image file-cta">
+                  <input
+                    type="file"
+                    id="file"
+                    className="imageUpload"
+                    name="file"
+                    accept=".png, .jpg"
+                    onChange={fileSelectHandler}
+                  />
+                  {/* <span className="addPost__image file-cta">
                     <span className="file-icon">
-                      <input
-                        type="file"
-                        id="file"
-                        className="imageUpload"
-                        name="file"
-                        accept=".png, .jpg"
-                        onChange={fileSelectHandler}
-                      />
-                      {/* <PhotoCameraIcon></PhotoCameraIcon> */}
                     </span>
                     <span className="file-label">Add Image</span>
-                  </span>
+                  </span> */}
                 </label>
                 {/* <label className="addPost__form__label">Title</label> */}
                 <input
@@ -156,7 +155,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddPost: (token, title, body, image) => dispatch(addPost(token, title, body, image)),
+    onAddPost: (token, title, body, image) =>
+      dispatch(addPost(token, title, body, image)),
   };
 };
 

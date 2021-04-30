@@ -35,7 +35,7 @@ export const editPost = (token, postId, title, body, image) => async (
     );
     console.log(responseImg.data);
 
-    toast("Post Added Successfully", {
+    toast("Post Changed Successfully", {
       autoClose: 2000,
     });
   } catch (err) {

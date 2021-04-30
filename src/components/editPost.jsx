@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import joi from "joi-browser";
 import { ToastContainer } from "react-toastify";
 
-import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
-
 import { getPostById, editPost } from "./../actions";
+import URI from "../apis/URI";
 
 const EditPost = (props) => {
   const postId = props.match.params.id;
@@ -99,7 +98,26 @@ const EditPost = (props) => {
           <form className="addPost__form" onSubmit={submitHandler}>
             <div className="row">
               <div className="col-lg-12">
-                <label className="addPost__form__inputupload file-label">
+                <div className="editprofile__header__image">
+                  <img
+                    className="editprofile__header__image__img--editPost"
+                    src={URI + "/post/postImg/" + postId}
+                    alt=""
+                  />
+                  <label htmlFor="file">
+                    <i className="editprofile__header__camera--editPost fas fa-camera-retro"></i>
+                  </label>
+                  <input
+                    id="file"
+                    className="imageUpload"
+                    type="file"
+                    name="file"
+                    accept=".png, .jpg"
+                    onChange={fileSelectHandler}
+                  />
+                </div>
+
+                {/* <label className="addPost__form__inputupload file-label">
                   <span className="addPost__image file-cta">
                     <span className="file-icon">
                       <input
@@ -113,7 +131,7 @@ const EditPost = (props) => {
                     </span>
                     <span className="file-label">Add Image</span>
                   </span>
-                </label>
+                </label> */}
                 <input
                   className="addPost__form__input input is-link"
                   type="text"
