@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
+import { ToastContainer } from "react-toastify";
 
 import PhotoCameraIcon from "@material-ui/icons/PhotoCamera";
 
 import { getPostById, editPost } from "./../actions";
 
 const EditPost = (props) => {
-
   const postId = props.match.params.id;
   const { getPostById, userPost, token } = props;
 
   useEffect(() => {
     getPostById(postId);
   }, [getPostById, postId]);
-  
+
   /* hooks */
   const [title] = useState();
   const [body] = useState();
+  let [image, setImage] = useState(null);
   const [errors, setErrors] = useState({
     title,
     body,
@@ -73,15 +74,17 @@ const EditPost = (props) => {
     });
   };
 
+  // fileSelectHandler
+  const fileSelectHandler = async (e) => {
+    console.log("huhu");
+    setImage(e.target.files[0]);
+  };
+
+  //submitHandler
   const submitHandler = (e) => {
-    console.log(postId)
+    console.log(postId);
     e.preventDefault();
-    props.onEditPost(
-      token,
-      postId,
-      post.title,
-      post.body,
-    );
+    props.onEditPost(token, postId, post.title, post.body, image);
     const errorr = validate();
     if (errorr) return;
     // history.push("/blogs");
@@ -89,6 +92,7 @@ const EditPost = (props) => {
 
   return (
     <React.Fragment>
+      <ToastContainer />
       <div className="addPost">
         <div className="container">
           <h2 className="blogs__header">Edit Post</h2>
@@ -96,10 +100,16 @@ const EditPost = (props) => {
             <div className="row">
               <div className="col-lg-12">
                 <label className="addPost__form__inputupload file-label">
-                  <input className="file-input" type="file" name="image" />
                   <span className="addPost__image file-cta">
                     <span className="file-icon">
-                      <PhotoCameraIcon></PhotoCameraIcon>
+                      <input
+                        type="file"
+                        id="file"
+                        className="imageUpload"
+                        name="file"
+                        accept=".png, .jpg"
+                        onChange={fileSelectHandler}
+                      />
                     </span>
                     <span className="file-label">Add Image</span>
                   </span>
@@ -154,16 +164,9 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getPostById,
-    onEditPost: (
-      token,
-      postId,
-      title,
-      body
-    ) =>
-      dispatch(
-        editPost(token, postId, title, body)
-      ),
+    onEditPost: (token, postId, title, body, image) =>
+      dispatch(editPost(token, postId, title, body, image)),
   };
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(EditPost);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPost);
