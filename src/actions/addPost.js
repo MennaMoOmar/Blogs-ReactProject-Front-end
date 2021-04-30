@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import db from "../apis/db";
 
 export const addPost = (token, title, body, image) => async (dispatch) => {
-  console.log(image);
   const newPost = {
     title: title,
     body: body,
@@ -26,17 +25,10 @@ export const addPost = (token, title, body, image) => async (dispatch) => {
     // image
     const formData = new FormData();
     formData.append("postImage", image, image.name);
-    const headerData2 = {
-      headers: {
-        Authorization: token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    };
     const responseImg = await db.post(
       `/post/postImg/${response.data._id}`,
       formData,
-      headerData2
+      headerData
     );
     console.log(responseImg.data);
 
