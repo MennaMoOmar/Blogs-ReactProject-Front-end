@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import joi from "joi-browser";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 import {
   getProfile,
@@ -166,9 +167,16 @@ const EditProfile = (props) => {
     props.onDeletePost(postId);
   };
 
+  // fileSelectHandler
+  const fileSelectHandler = async (e) => {
+    await setImage(e.target.files[0]);
+  };
+
   // submitHandler
   const submitHandler = (e) => {
     e.preventDefault();
+    const errorr = validate();
+    if (errorr) return;
     props.onEditProfile(
       token,
       user.firstname,
@@ -178,32 +186,35 @@ const EditProfile = (props) => {
       user.city,
       user.street
     );
-    const errorr = validate();
-    if (errorr) return;
+
     // image
-    const formData = new FormData();
-    formData.append("profileImage", image, image.name);
-    console.log(formData.get("profileImage").name);
-    const headerData = {
-      headers: {
-        Authorization: token,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    };
-    axios
-      .post("http://localhost:3001/user/profileImg", formData, headerData, {
-        onUploadProgress: (progressEvent) => {
-          console.log(
-            "Upload Progress: " +
-              (Math.round((progressEvent.loaded / progressEvent.total) * 100) +
-                "%")
-          );
+    if (image) {
+      const formData = new FormData();
+      formData.append("profileImage", image, image.name);
+      console.log(formData.get("profileImage").name);
+      const headerData = {
+        headers: {
+          Authorization: token,
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-      })
-      .then((res) => {
-        console.log(res.data);
-      });
+      };
+      axios
+        .post("http://localhost:3001/user/profileImg", formData, headerData, {
+          onUploadProgress: (progressEvent) => {
+            console.log(
+              "Upload Progress: " +
+                (Math.round(
+                  (progressEvent.loaded / progressEvent.total) * 100
+                ) +
+                  "%")
+            );
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        });
+    }
   };
 
   const HandlerEditPost = (id) => {
@@ -211,18 +222,14 @@ const EditProfile = (props) => {
     history.push(`/editpost/${id}`);
   };
 
-  // fileSelectHandler
-  const fileSelectHandler = async (e) => {
-    await setImage(e.target.files[0]);
-  };
-
   // onImageError
   const onImageError = (e) => {
-    e.target.src = '/images/user.png';
-  }
+    e.target.src = "/images/user.png";
+  };
 
   return (
     <React.Fragment>
+      <ToastContainer />
       <div className="editprofile container">
         <div className="editprofile__header">
           <div className="editprofile__header__image">
@@ -437,7 +444,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllPosts,
     getProfile,
-    getAllPostsLoginUser: (token)=>dispatch(getAllPostsLoginUser(token)),
+    getAllPostsLoginUser: (token) => dispatch(getAllPostsLoginUser(token)),
     onDeletePost: (postId) => dispatch(deletePost(postId)),
     onEditProfile: (
       token,

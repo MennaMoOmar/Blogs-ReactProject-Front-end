@@ -1,31 +1,43 @@
-import db from '../apis/db';
+import { toast } from "react-toastify";
 
-export const editProfile = (token, firstname, lastname, phone, country, city, street) => async (dispatch) => {
-    const editdata = {
-        firstname: firstname,
-        lastname: lastname,
-        phone: phone,
-        country: country,
-        city: city,
-        street: street,     
-    };
+import db from "../apis/db";
 
-    const headerData = {
-        headers: {
-          'Authorization': token,
-          'Accept': "application/json",
-          'Content-Type': "application/json"
-        },
-      };
+export const editProfile = (
+  token,
+  firstname,
+  lastname,
+  phone,
+  country,
+  city,
+  street
+) => async (dispatch) => {
+  const editdata = {
+    firstname: firstname,
+    lastname: lastname,
+    phone: phone,
+    country: country,
+    city: city,
+    street: street,
+  };
 
-    // console.log(token, editdata)
-    
-    try{
-        const response = await db.patch('/user/profile', editdata, headerData);
-        console.log(response.data)
-        dispatch({type:"EDIT_PROFILE",payload: response.data});
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+  const headerData = {
+    headers: {
+      Authorization: token,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+
+  // console.log(token, editdata)
+
+  try {
+    const response = await db.patch("/user/profile", editdata, headerData);
+    // console.log(response.data)
+    dispatch({ type: "EDIT_PROFILE", payload: response.data });
+    toast("Changes have been saved!", {
+      autoClose: 2000,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
