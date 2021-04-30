@@ -9,7 +9,8 @@ export const editProfile = (
   phone,
   country,
   city,
-  street
+  street,
+  image
 ) => async (dispatch) => {
   const editdata = {
     firstname: firstname,
@@ -34,6 +35,18 @@ export const editProfile = (
     const response = await db.patch("/user/profile", editdata, headerData);
     // console.log(response.data)
     dispatch({ type: "EDIT_PROFILE", payload: response.data });
+    // image
+    if (image) {
+      const formData = new FormData();
+      formData.append("profileImage", image, image.name);
+      // console.log(formData.get("profileImage").name);
+      const responseImg = await db.post(
+        `/user/profileImg`,
+        formData,
+        headerData
+      );
+      console.log(responseImg.data)
+    }
     toast("Changes have been saved!", {
       autoClose: 2000,
     });

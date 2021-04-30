@@ -26,15 +26,16 @@ export const editPost = (token, postId, title, body, image) => async (
     dispatch({ type: "EDIT_POST", payload: response.data });
 
     // image
-    const formData = new FormData();
-    formData.append("postImage", image, image.name);
-    const responseImg = await db.post(
-      `/post/postImg/${response.data._id}`,
-      formData,
-      headerData
-    );
-    console.log(responseImg.data);
-
+    if (image) {
+      const formData = new FormData();
+      formData.append("postImage", image, image.name);
+      const responseImg = await db.post(
+        `/post/postImg/${response.data._id}`,
+        formData,
+        headerData
+      );
+      console.log(responseImg.data);
+    }
     toast("Post Changed Successfully", {
       autoClose: 2000,
     });

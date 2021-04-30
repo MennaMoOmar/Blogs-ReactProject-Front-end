@@ -1,7 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import { toast } from "react-toastify";
 
-// import db from '../apis/db';
+import db from "../apis/db";
 
 export const authStart = () => {
   return {
@@ -45,30 +45,29 @@ export const auth = (username, password) => async (dispatch) => {
     password: password,
     token: true,
   };
-  // console.log(authdata)
+  try {
+    const response = await db.post("/user/login", authdata);
+    dispatch(authSuccess(response.data.token, response.data.user._id));
+    dispatch(checkAuthTimeout(3600 * 1000)); //logout after 1h
+    localStorage.setItem("token", response.data.token);
+    toast.success("Login Successfully");
+  } catch (err) {
+    toast.error("Wrong Username or Password!");
+    console.log(err.response.data.error);
+    dispatch(authFail(err.response.data.err));
+  }
 
-  axios
-    .post("http://localhost:3001/user/login", authdata)
-    .then((response) => {
-      dispatch(authSuccess(response.data.token, response.data.user._id));
-      dispatch(checkAuthTimeout(3600 * 1000)); //logout after 1h
-      localStorage.setItem("token", response.data.token);
-      toast.success("Login Successfully");
-    })
-    .catch((err) => {
-      toast.error("Wrong Username or Password!");
-      console.log(err.response.data.error);
-      dispatch(authFail(err.response.data.error));
-    });
-
-  // try{
-  //     const response = await db.post('/user/login', authdata);
-  //     console.log(response)
-  //     dispatch(authSuccess(response.data.idToken, response.data.localId))
-  // }
-  // catch(err){
-  //     console.log(err)
-  //     console.log(err.response.data.error.errors)
-  //     dispatch(authFail(err))
-  // }
+  // axios
+  //   .post("https://menna-news-backend.herokuapp.com/user/login", authdata)
+  //   .then((response) => {
+  //     dispatch(authSuccess(response.data.token, response.data.user._id));
+  //     dispatch(checkAuthTimeout(3600 * 1000)); //logout after 1h
+  //     localStorage.setItem("token", response.data.token);
+  //     toast.success("Login Successfully");
+  //   })
+  //   .catch((err) => {
+  //     toast.error("Wrong Username or Password!");
+  //     console.log(err.response.data.error);
+  //     dispatch(authFail(err.response.data.error));
+  //   });
 };

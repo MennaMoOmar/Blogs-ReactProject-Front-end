@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
 import { ToastContainer } from "react-toastify";
+// import { useHistory } from "react-router";
 
 import { getPostById, editPost } from "./../actions";
 import URI from "../apis/URI";
 
 const EditPost = (props) => {
+  /* history */
+  // const history = useHistory();
+
   const postId = props.match.params.id;
   const { getPostById, userPost, token } = props;
 
@@ -86,7 +90,7 @@ const EditPost = (props) => {
     props.onEditPost(token, postId, post.title, post.body, image);
     const errorr = validate();
     if (errorr) return;
-    // history.push("/blogs");
+    // history.push("/editprofile");
   };
 
   return (
@@ -116,22 +120,6 @@ const EditPost = (props) => {
                     onChange={fileSelectHandler}
                   />
                 </div>
-
-                {/* <label className="addPost__form__inputupload file-label">
-                  <span className="addPost__image file-cta">
-                    <span className="file-icon">
-                      <input
-                        type="file"
-                        id="file"
-                        className="imageUpload"
-                        name="file"
-                        accept=".png, .jpg"
-                        onChange={fileSelectHandler}
-                      />
-                    </span>
-                    <span className="file-label">Add Image</span>
-                  </span>
-                </label> */}
                 <input
                   className="addPost__form__input input is-link"
                   type="text"
@@ -144,7 +132,6 @@ const EditPost = (props) => {
                 {errors.title && (
                   <div className="text-danger">{errors.title}</div>
                 )}
-                {/* <label className="addPost__form__label">body</label> */}
                 <textarea
                   className="addPost__form__textarea input is-link"
                   placeholder="body"

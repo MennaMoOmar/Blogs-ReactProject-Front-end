@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import joi from "joi-browser";
 import { useHistory } from "react-router";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 
 import {
@@ -173,48 +172,20 @@ const EditProfile = (props) => {
   };
 
   // submitHandler
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const errorr = validate();
     if (errorr) return;
-    props.onEditProfile(
+    await props.onEditProfile(
       token,
       user.firstname,
       user.lastname,
       user.phone,
       user.country,
       user.city,
-      user.street
+      user.street,
+      image
     );
-
-    // image
-    if (image) {
-      const formData = new FormData();
-      formData.append("profileImage", image, image.name);
-      console.log(formData.get("profileImage").name);
-      const headerData = {
-        headers: {
-          Authorization: token,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      };
-      axios
-        .post("http://localhost:3001/user/profileImg", formData, headerData, {
-          onUploadProgress: (progressEvent) => {
-            console.log(
-              "Upload Progress: " +
-                (Math.round(
-                  (progressEvent.loaded / progressEvent.total) * 100
-                ) +
-                  "%")
-            );
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-        });
-    }
   };
 
   const HandlerEditPost = (id) => {
@@ -453,10 +424,11 @@ const mapDispatchToProps = (dispatch) => {
       phone,
       countrty,
       city,
-      street
+      street,
+      image
     ) =>
       dispatch(
-        editProfile(token, firstname, lastname, phone, countrty, city, street)
+        editProfile(token, firstname, lastname, phone, countrty, city, street, image)
       ),
   };
 };
