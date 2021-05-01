@@ -25,7 +25,7 @@ const EditProfile = (props) => {
     getAllPosts();
     getProfile(token);
     getAllPostsLoginUser(token);
-  }, [token, getAllPostsLoginUser]);
+  });
 
   /* hooks */
   const [firstname] = useState();

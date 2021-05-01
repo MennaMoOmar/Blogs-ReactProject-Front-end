@@ -16,7 +16,7 @@ const Navbar = (props) => {
     if (localStorage.getItem("token")) {
       getProfile(token);
     }
-  }, [getProfile, token]);
+  });
 
   const loginLogout = () => {
     if (props.token) {

@@ -15,7 +15,7 @@ const Card = (props) => {
     getAllPosts();
     // getProfile(token);
     // getAllPostsLoginUser(token);
-  }, [getAllPosts, getProfile, getAllPostsLoginUser, token]);
+  });
 
    // onImageError
    const onImageError = (e) => {
