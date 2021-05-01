@@ -1,4 +1,4 @@
-const reducer = (state = [], action) => {
+const editProfileReducer = (state = [], action) => {
   switch (action.type) {
     case "EDIT_PROFILE":
       return [...state, action.payload];
@@ -7,4 +7,4 @@ const reducer = (state = [], action) => {
   }
 };
 
-export default reducer;
+export default editProfileReducer;

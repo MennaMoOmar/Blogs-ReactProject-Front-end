@@ -19,6 +19,8 @@ const EditProfile = (props) => {
 
   const { token, userProfile, getAllPostsLoginUser } = props;
 
+  // console.log(token)
+
   useEffect(() => {
     getAllPosts();
     getProfile(token);

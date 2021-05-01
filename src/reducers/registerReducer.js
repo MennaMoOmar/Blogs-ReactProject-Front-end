@@ -5,7 +5,7 @@ const updateObject = (oldObject, updatedProperties) => {
   };
 };
 
-const reducer = (state = [], action) => {
+const registerReducer = (state = [], action) => {
   switch (action.type) {
     case "REGISTER":
       return(
@@ -22,7 +22,7 @@ const reducer = (state = [], action) => {
   }
 };
 
-export default reducer;
+export default registerReducer;
 
 
 // const updateObject = (oldObject, updatedProperties) => {

@@ -24,6 +24,6 @@ export const getProfile = (token) =>
     };
     // console.log(headerData);
     const responce = await db.get("/user/profile", headerData);
-    // console.log(responce);
+    // console.log(responce.data);
     dispatch({ type: "GET_PROFILE", payload: responce.data });
   };

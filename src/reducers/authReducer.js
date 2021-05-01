@@ -34,15 +34,21 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-  localStorage.removeItem('token')
-  return updateObject(state,
-    {
-      token: null,
-      userId: null
-    });
+  localStorage.removeItem('token');
+  return updateObject(state, {
+    token: null,
+    userId: null,
+    error: null,
+    loading: false,
+  });
+  // return updateObject(state,
+  //   {
+  //     token: null,
+  //     userId: null
+  //   });
 };
 
-const reducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_START":
       return authStart(state, action);
@@ -57,4 +63,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default authReducer;
