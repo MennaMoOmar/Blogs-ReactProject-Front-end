@@ -24,8 +24,33 @@ const Login = (props) => {
 
   /* schema */
   const schema = {
-    username: joi.string().email().required(),
-    password: joi.string().required().min(6),
+    username: joi
+      .string()
+      .email()
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "any.required":
+              return { message: "Userame is Required" };
+            default:
+              return { message: "Invalid Email" };
+          }
+        });
+      }),
+    password: joi
+      .string()
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "any.required":
+              return { message: "Password is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
   };
 
   /* validate */
