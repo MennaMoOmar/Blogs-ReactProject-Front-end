@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 import { getPostById, editPost } from "./../actions";
 import URI from "../apis/URI";
+import Spinner from "./spinner";
 
 const EditPost = (props) => {
   /* history */
@@ -19,6 +20,7 @@ const EditPost = (props) => {
   }, [getPostById, postId]);
 
   /* hooks */
+  const [loading,setLoading] = useState(false);
   const [title] = useState();
   const [body] = useState();
   let [image, setImage] = useState(null);
@@ -79,17 +81,17 @@ const EditPost = (props) => {
 
   // fileSelectHandler
   const fileSelectHandler = async (e) => {
-    console.log("huhu");
     setImage(e.target.files[0]);
   };
 
   //submitHandler
-  const submitHandler = (e) => {
-    console.log(postId);
+  const submitHandler = async (e) => {
     e.preventDefault();
-    props.onEditPost(token, postId, post.title, post.body, image);
     const errorr = validate();
     if (errorr) return;
+    setLoading(true);
+    await props.onEditPost(token, postId, post.title, post.body, image);
+    setLoading(false);
     // history.push("/editprofile");
   };
 
@@ -99,6 +101,9 @@ const EditPost = (props) => {
       <div className="addPost">
         <div className="container">
           <h2 className="blogs__header">Edit Post</h2>
+          {loading ? (
+              <Spinner />
+            ) : (
           <form className="addPost__form" onSubmit={submitHandler}>
             <div className="row">
               <div className="col-lg-12">
@@ -150,6 +155,7 @@ const EditPost = (props) => {
               Save Changes
             </button>
           </form>
+            )}
         </div>
       </div>
     </React.Fragment>

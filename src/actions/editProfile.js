@@ -31,7 +31,7 @@ export const editProfile = (
 
   try {
     const response = await db.patch("/user/profile", editdata, headerData);
-    dispatch({ type: "EDIT_PROFILE", payload: response.data });
+    dispatch({ type: "EDIT_PROFILE", payload: response.data});
 
     // image
     if (image) {

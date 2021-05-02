@@ -8,6 +8,7 @@ import { auth } from "./../actions";
 import Spinner from "./spinner";
 
 const Login = (props) => {
+  // console.log(props.loading);
   /* history */
   const history = useHistory();
 
@@ -89,8 +90,9 @@ const Login = (props) => {
         <div className="container">
           <h2 className="login__header">login</h2>
           <div className="login__frmwrapper">
-            {/* {errorMessage} */}
-            {<Spinner></Spinner> && (
+            {props.loading ? (
+              <Spinner />
+            ) : (
               <form className="login__form" action="" onSubmit={submitHandler}>
                 {/* email */}
                 <div className="field">

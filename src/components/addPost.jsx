@@ -4,11 +4,13 @@ import joi from "joi-browser";
 import { ToastContainer } from "react-toastify";
 
 import { addPost } from "./../actions";
+import Spinner from "./spinner";
 
 const AddPost = (props) => {
   const { token } = props;
 
   /* hooks */
+  const [loading, setLoading] = useState(false);
   const [title] = useState();
   const [body] = useState();
   let [image, setImage] = useState(null);
@@ -70,16 +72,17 @@ const AddPost = (props) => {
 
   // fileSelectHandler
   const fileSelectHandler = async (e) => {
-    console.log("huhu");
     setImage(e.target.files[0]);
   };
 
   // submitHandler
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const errorr = validate();
     if (errorr) return;
-    props.onAddPost(token, post.title, post.body, image);
+    setLoading(true);
+    await props.onAddPost(token, post.title, post.body, image);
+    setLoading(false);
   };
 
   return (
@@ -88,57 +91,58 @@ const AddPost = (props) => {
       <div className="addPost">
         <div className="container">
           <h2 className="blogs__header">Create Post</h2>
-          <form className="addPost__form" onSubmit={submitHandler}>
-            <div className="row">
-              <div className="col-lg-12">
-                {/* <label className="addPost__form__label">Image</label> */}
-                <label className="addPost__form__inputupload file-label">
-                  <input
-                    type="file"
-                    id="file"
-                    className="imageUpload"
-                    name="file"
-                    accept=".png, .jpg"
-                    onChange={fileSelectHandler}
-                  />
-                  {/* <span className="addPost__image file-cta">
+          {loading ? (
+            <Spinner />
+          ) : (
+            <form className="addPost__form" onSubmit={submitHandler}>
+              <div className="row">
+                <div className="col-lg-12">
+                  <label className="addPost__form__inputupload file-label">
+                    <input
+                      type="file"
+                      id="file"
+                      className="imageUpload"
+                      name="file"
+                      accept=".png, .jpg"
+                      onChange={fileSelectHandler}
+                    />
+                    {/* <span className="addPost__image file-cta">
                     <span className="file-icon">
                     </span>
                     <span className="file-label">Add Image</span>
                   </span> */}
-                </label>
-                {/* <label className="addPost__form__label">Title</label> */}
-                <input
-                  className="addPost__form__input input is-link"
-                  type="text"
-                  placeholder="Title"
-                  id="title"
-                  name="title"
-                  onChange={handleChangeTitle}
-                  value={title}
-                />
-                {errors.title && (
-                  <div className="text-danger">{errors.title}</div>
-                )}
-                {/* <label className="addPost__form__label">Description</label> */}
-                <textarea
-                  className="addPost__form__textarea input is-link"
-                  placeholder="Description"
-                  id="body"
-                  name="body"
-                  onChange={handleChangeBody}
-                  value={body}
-                  rows="3"
-                ></textarea>
-                {errors.body && (
-                  <div className="text-danger">{errors.body}</div>
-                )}
+                  </label>
+                  <input
+                    className="addPost__form__input input is-link"
+                    type="text"
+                    placeholder="Title"
+                    id="title"
+                    name="title"
+                    onChange={handleChangeTitle}
+                    value={title}
+                  />
+                  {errors.title && (
+                    <div className="text-danger">{errors.title}</div>
+                  )}
+                  <textarea
+                    className="addPost__form__textarea input is-link"
+                    placeholder="Description"
+                    id="body"
+                    name="body"
+                    onChange={handleChangeBody}
+                    value={body}
+                    rows="3"
+                  ></textarea>
+                  {errors.body && (
+                    <div className="text-danger">{errors.body}</div>
+                  )}
+                </div>
               </div>
-            </div>
-            <button className="addPost__form__btn--save  button is-rounded">
-              Add
-            </button>
-          </form>
+              <button className="addPost__form__btn--save  button is-rounded">
+                Add
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </React.Fragment>

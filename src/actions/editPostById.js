@@ -22,7 +22,7 @@ export const editPost = (token, postId, title, body, image) => async (
 
   try {
     const response = await db.patch(`/post/${postId}`, editdata, headerData);
-    console.log(response.data);
+    // console.log(response.data);
     dispatch({ type: "EDIT_POST", payload: response.data });
 
     // image

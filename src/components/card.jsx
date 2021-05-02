@@ -9,7 +9,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import SendIcon from "@material-ui/icons/Send";
 
 const Card = (props) => {
-  const { getAllPosts, getProfile, getAllPostsLoginUser, token } = props;
+  const { getAllPosts} = props;
 
   useEffect(() => {
     getAllPosts();
@@ -69,6 +69,7 @@ const Card = (props) => {
 // mapStateToProps
 const mapStateToProps = (state) => {
   return {
+    loading: state.authReducer.loading,
     posts: state.posts,
     token: state.authReducer.token,
   };

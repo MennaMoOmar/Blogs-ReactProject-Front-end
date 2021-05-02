@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import joi from "joi-browser";
 import { useHistory } from "react-router";
 import { ToastContainer } from "react-toastify";
+import Spinner from "./spinner";
 
 import {
   getProfile,
@@ -22,12 +23,13 @@ const EditProfile = (props) => {
   // console.log(token)
 
   useEffect(() => {
-    getAllPosts();
+    // getAllPosts();
     getProfile(token);
     getAllPostsLoginUser(token);
   });
 
   /* hooks */
+  const [loading,setLoading] = useState(false);
   const [firstname] = useState();
   const [lastname] = useState();
   const [phone] = useState();
@@ -163,9 +165,11 @@ const EditProfile = (props) => {
   };
 
   // handlerDeletePost
-  const handlerDeletePost = (postId) => {
+  const handlerDeletePost = async (postId) => {
     console.log(postId);
-    props.onDeletePost(postId);
+    setLoading(true)
+    await props.onDeletePost(postId);
+    setLoading(false)
   };
 
   // fileSelectHandler
@@ -178,6 +182,7 @@ const EditProfile = (props) => {
     e.preventDefault();
     const errorr = validate();
     if (errorr) return;
+    setLoading(true)
     await props.onEditProfile(
       token,
       user.firstname,
@@ -188,6 +193,7 @@ const EditProfile = (props) => {
       user.street,
       image
     );
+    setLoading(false);
   };
 
   const HandlerEditPost = (id) => {
@@ -230,116 +236,109 @@ const EditProfile = (props) => {
         </div>
         <div className="editprofile__edit">
           <div className="editprofile__frmwrapper">
-            <form
-              className="editprofile__edit__form"
-              action=""
-              onSubmit={submitHandler}
-            >
-              <div className="row">
-                <div className="col-lg-6">
-                  <input
-                    className="editprofile__edit__form__input input is-link"
-                    type="text"
-                    placeholder="First Name"
-                    onChange={handleChangeFirstname}
-                    // value={!firstname?userProfile.firstname:firstname}
-                    value={user.firstname}
-                    id="firstname"
-                    name="firstname"
-                  />
-                  {errors.firstname && (
-                    <div className="text-danger">{errors.firstname}</div>
-                  )}
-                  <input
-                    className="editprofile__edit__form__input input is-link"
-                    type="text"
-                    placeholder="Phone"
-                    onChange={handleChangePhone}
-                    value={user.phone}
-                    id="phone"
-                    name="phone"
-                  />
-                  {errors.phone && (
-                    <div className="text-danger">{errors.phone}</div>
-                  )}
-                  <input
-                    className="editprofile__edit__form__input input is-link"
-                    type="text"
-                    placeholder="City"
-                    onChange={handleChangeCity}
-                    value={user.city}
-                    id="city"
-                    name="city"
-                  />
-                  {errors.city && (
-                    <div className="text-danger">{errors.city}</div>
-                  )}
-                  {/* <label className="editprofile__header__inputupload file-label">
+            {loading ? (
+              <Spinner />
+            ) : (
+              <form
+                className="editprofile__edit__form"
+                action=""
+                onSubmit={submitHandler}
+              >
+                <div className="row">
+                  <div className="col-lg-6">
                     <input
-                      className="file-input"
-                      type="file"
-                      name="file"
-                      accept=".png, .jpg"
-                      onChange={fileSelectHandler}
-                      ref = {image => {image = image}}
+                      className="editprofile__edit__form__input input is-link"
+                      type="text"
+                      placeholder="First Name"
+                      onChange={handleChangeFirstname}
+                      // value={!firstname?userProfile.firstname:firstname}
+                      value={user.firstname}
+                      id="firstname"
+                      name="firstname"
                     />
-                    <span className="register__form__image file-cta">
-                      <span className="file-icon">
-                        <PhotoCameraIcon></PhotoCameraIcon>
-                      </span>
-                      <span className="file-label">Change Image</span>
-                    </span>
-                  </label> */}
+                    {errors.firstname && (
+                      <div className="text-danger">{errors.firstname}</div>
+                    )}
+                    <input
+                      className="editprofile__edit__form__input input is-link"
+                      type="text"
+                      placeholder="Phone"
+                      onChange={handleChangePhone}
+                      value={user.phone}
+                      id="phone"
+                      name="phone"
+                    />
+                    {errors.phone && (
+                      <div className="text-danger">{errors.phone}</div>
+                    )}
+                    <input
+                      className="editprofile__edit__form__input input is-link"
+                      type="text"
+                      placeholder="City"
+                      onChange={handleChangeCity}
+                      value={user.city}
+                      id="city"
+                      name="city"
+                    />
+                    {errors.city && (
+                      <div className="text-danger">{errors.city}</div>
+                    )}
+                  </div>
+                  <div className="col-lg-6">
+                    <input
+                      className="editprofile__edit__form__input input is-link"
+                      type="text"
+                      placeholder="Last Name"
+                      onChange={handleChangeLastname}
+                      value={user.lastname}
+                      id="lastname"
+                      name="lastname"
+                    />
+                    {errors.lastname && (
+                      <div className="text-danger">{errors.lastname}</div>
+                    )}
+                    <input
+                      className="editprofile__edit__form__input input is-link"
+                      type="text"
+                      placeholder="Country"
+                      onChange={handleChangeCountry}
+                      value={user.country}
+                      id="country"
+                      name="country"
+                    />
+                    {errors.country && (
+                      <div className="text-danger">{errors.country}</div>
+                    )}
+                    <input
+                      className="editprofile__edit__form__input input is-link"
+                      type="text"
+                      placeholder="Street"
+                      onChange={handleChangeStreet}
+                      value={user.street}
+                      id="street"
+                      name="street"
+                    />
+                    {errors.street && (
+                      <div className="text-danger">{errors.street}</div>
+                    )}
+                  </div>
                 </div>
-                <div className="col-lg-6">
-                  <input
-                    className="editprofile__edit__form__input input is-link"
-                    type="text"
-                    placeholder="Last Name"
-                    onChange={handleChangeLastname}
-                    value={user.lastname}
-                    id="lastname"
-                    name="lastname"
-                  />
-                  {errors.lastname && (
-                    <div className="text-danger">{errors.lastname}</div>
-                  )}
-                  <input
-                    className="editprofile__edit__form__input input is-link"
-                    type="text"
-                    placeholder="Country"
-                    onChange={handleChangeCountry}
-                    value={user.country}
-                    id="country"
-                    name="country"
-                  />
-                  {errors.country && (
-                    <div className="text-danger">{errors.country}</div>
-                  )}
-                  <input
-                    className="editprofile__edit__form__input input is-link"
-                    type="text"
-                    placeholder="Street"
-                    onChange={handleChangeStreet}
-                    value={user.street}
-                    id="street"
-                    name="street"
-                  />
-                  {errors.street && (
-                    <div className="text-danger">{errors.street}</div>
-                  )}
-                </div>
-              </div>
-              <button className="editprofile__edit__form__btn--save  button is-rounded">
-                Save
-              </button>
-              {/* <button className="editprofile__edit__form__btn--cancel button is-rounded">
+                <button className="editprofile__edit__form__btn--save  button is-rounded">
+                  Save
+                </button>
+                {/* <button className="editprofile__edit__form__btn--cancel button is-rounded">
                 Cancel
               </button> */}
-            </form>
+              </form>
+            )}
           </div>
         </div>
         <div className="editprofile__posts">
+          
+        {/* {loading ? (
+              <Spinner />
+            ) : ( */}
+              
           {props.userPosts.length === 0 ? (
             <h2 className="editprofile__posts__nopost">No Posts</h2>
           ) : (
@@ -394,7 +393,6 @@ const EditProfile = (props) => {
               );
             })
           )}
-          {/* <Card></Card> */}
         </div>
       </div>
     </React.Fragment>
@@ -403,8 +401,9 @@ const EditProfile = (props) => {
 
 // mapStateToProps
 const mapStateToProps = (state) => {
-  // console.log(state);
+  // console.log(state.authReducer.loading);
   return {
+    loading: state.authReducer.loading,
     id: state.authReducer.userId,
     token: state.authReducer.token,
     userProfile: state.getProfileReducer,
@@ -430,7 +429,16 @@ const mapDispatchToProps = (dispatch) => {
       image
     ) =>
       dispatch(
-        editProfile(token, firstname, lastname, phone, countrty, city, street, image)
+        editProfile(
+          token,
+          firstname,
+          lastname,
+          phone,
+          countrty,
+          city,
+          street,
+          image
+        )
       ),
   };
 };

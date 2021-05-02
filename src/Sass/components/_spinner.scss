@@ -19,7 +19,7 @@
 .loader:before,
 .loader:after {
   position: absolute;
-  content: '';
+  content: "";
 }
 .loader:before {
   width: 5.2em;
@@ -64,4 +64,11 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+/******************************/
+
+img.loading {
+  margin: auto;
+  display: block;
 }
