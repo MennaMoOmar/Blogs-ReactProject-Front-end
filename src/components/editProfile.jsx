@@ -29,7 +29,7 @@ const EditProfile = (props) => {
   });
 
   /* hooks */
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [firstname] = useState();
   const [lastname] = useState();
   const [phone] = useState();
@@ -57,12 +57,130 @@ const EditProfile = (props) => {
 
   /* schema */
   const schema = {
-    firstname: joi.string().alphanum().min(3).max(10).required(),
-    lastname: joi.string().alphanum().min(3).max(10).required(),
-    phone: joi.number().required().min(6),
-    country: joi.string().alphanum().min(3).max(10).required(),
-    city: joi.string().alphanum().min(3).max(10).required(),
-    street: joi.string().alphanum().min(3).max(10).required(),
+    firstname: joi
+      .string()
+      .alphanum()
+      .min(3)
+      .max(10)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "First Name must be more than 3 characters" };
+            case "string.max":
+              return { message: "First Name must be less than 10 characters" };
+            case "any.required":
+              return { message: "First Name is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    lastname: joi
+      .string()
+      .alphanum()
+      .min(3)
+      .max(10)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Last Name must be more than 3 characters" };
+            case "string.max":
+              return { message: "Last Name must be less than 10 characters" };
+            case "any.required":
+              return { message: "Last Name is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    phone: joi
+      .number()
+      .required()
+      .min(6)
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "number.min":
+              return { message: "Phone must be more than 6 characters" };
+            case "number":
+              return { message: "Phone must be Numbers Only" };
+            case "any.required":
+              return { message: "Phone is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    country: joi
+      .string()
+      .min(3)
+      .max(10)
+      .required()
+      .regex(/^[a-zA-Z\s]*$/)
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Country must be more than 3 characters" };
+            case "string.max":
+              return { message: "Country must be less than 10 characters" };
+            case "string":
+              return { message: "Country must be Character Only" };
+            case "any.required":
+              return { message: "Country is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    city: joi
+      .string()
+      .min(3)
+      .max(10)
+      .required()
+      .regex(/^[a-zA-Z\s]*$/)
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "City must be more than 3 characters" };
+            case "string.max":
+              return { message: "City must be less than 10 characters" };
+            case "string":
+              return { message: "City must be Character Only" };
+            case "any.required":
+              return { message: "City is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    street: joi
+      .string()
+      .min(3)
+      .max(10)
+      .required()
+      .regex(/^[a-zA-Z\s]*$/)
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Street must be more than 3 characters" };
+            case "string.max":
+              return { message: "Street must be less than 10 characters" };
+            case "string":
+              return { message: "Street must be Character Only" };
+            case "any.required":
+              return { message: "Street is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
   };
 
   /* validate */
@@ -167,9 +285,9 @@ const EditProfile = (props) => {
   // handlerDeletePost
   const handlerDeletePost = async (postId) => {
     console.log(postId);
-    setLoading(true)
+    setLoading(true);
     await props.onDeletePost(postId);
-    setLoading(false)
+    setLoading(false);
   };
 
   // fileSelectHandler
@@ -182,7 +300,7 @@ const EditProfile = (props) => {
     e.preventDefault();
     const errorr = validate();
     if (errorr) return;
-    setLoading(true)
+    setLoading(true);
     await props.onEditProfile(
       token,
       user.firstname,
@@ -334,11 +452,10 @@ const EditProfile = (props) => {
           </div>
         </div>
         <div className="editprofile__posts">
-          
-        {/* {loading ? (
+          {/* {loading ? (
               <Spinner />
             ) : ( */}
-              
+
           {props.userPosts.length === 0 ? (
             <h2 className="editprofile__posts__nopost">No Posts</h2>
           ) : (

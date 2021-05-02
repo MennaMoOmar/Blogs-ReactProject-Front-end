@@ -26,8 +26,41 @@ const AddPost = (props) => {
 
   /* schema */
   const schema = {
-    title: joi.string().min(5).max(50).required(),
-    body: joi.string().min(5).required(),
+    title: joi
+      .string()
+      .min(5)
+      .max(50)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Title must be more than 5 characters" };
+            case "string.max":
+              return { message: "Title must be less than 10 characters" };
+            case "any.required":
+              return { message: "Title is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    body: joi
+      .string()
+      .min(5)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Body must be more than 5 characters" };
+            case "any.required":
+              return { message: "Body is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
   };
 
   /* validate */

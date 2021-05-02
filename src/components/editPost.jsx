@@ -20,7 +20,7 @@ const EditPost = (props) => {
   }, [getPostById, postId]);
 
   /* hooks */
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [title] = useState();
   const [body] = useState();
   let [image, setImage] = useState(null);
@@ -36,8 +36,42 @@ const EditPost = (props) => {
 
   /* schema */
   const schema = {
-    title: joi.string().min(5).max(20).required(),
-    body: joi.string().min(5).max(200).required(),
+    title: joi
+      .string()
+      .min(5)
+      .max(20)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Title must be more than 5 characters" };
+            case "string.max":
+              return { message: "Title must be less than 10 characters" };
+            case "any.required":
+              return { message: "Title is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    body: joi
+      .string()
+      .min(5)
+      .max(200)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Body must be more than 5 characters" };
+            case "any.required":
+              return { message: "Body is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
   };
 
   /* validate */
@@ -102,60 +136,60 @@ const EditPost = (props) => {
         <div className="container">
           <h2 className="blogs__header">Edit Post</h2>
           {loading ? (
-              <Spinner />
-            ) : (
-          <form className="addPost__form" onSubmit={submitHandler}>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="editprofile__header__image">
-                  <img
-                    className="editprofile__header__image__img--editPost"
-                    src={URI + "/post/postImg/" + postId}
-                    alt=""
-                  />
-                  <label htmlFor="file">
-                    <i className="editprofile__header__camera--editPost fas fa-camera-retro"></i>
-                  </label>
+            <Spinner />
+          ) : (
+            <form className="addPost__form" onSubmit={submitHandler}>
+              <div className="row">
+                <div className="col-lg-12">
+                  <div className="editprofile__header__image">
+                    <img
+                      className="editprofile__header__image__img--editPost"
+                      src={URI + "/post/postImg/" + postId}
+                      alt=""
+                    />
+                    <label htmlFor="file">
+                      <i className="editprofile__header__camera--editPost fas fa-camera-retro"></i>
+                    </label>
+                    <input
+                      id="file"
+                      className="imageUpload"
+                      type="file"
+                      name="file"
+                      accept=".png, .jpg"
+                      onChange={fileSelectHandler}
+                    />
+                  </div>
                   <input
-                    id="file"
-                    className="imageUpload"
-                    type="file"
-                    name="file"
-                    accept=".png, .jpg"
-                    onChange={fileSelectHandler}
+                    className="addPost__form__input input is-link"
+                    type="text"
+                    placeholder="Title"
+                    id="title"
+                    name="title"
+                    onChange={handleChangeTitle}
+                    value={post.title}
                   />
+                  {errors.title && (
+                    <div className="text-danger">{errors.title}</div>
+                  )}
+                  <textarea
+                    className="addPost__form__textarea input is-link"
+                    placeholder="body"
+                    id="body"
+                    name="body"
+                    rows="3"
+                    onChange={handleChangeBody}
+                    value={post.body}
+                  ></textarea>
+                  {errors.body && (
+                    <div className="text-danger">{errors.body}</div>
+                  )}
                 </div>
-                <input
-                  className="addPost__form__input input is-link"
-                  type="text"
-                  placeholder="Title"
-                  id="title"
-                  name="title"
-                  onChange={handleChangeTitle}
-                  value={post.title}
-                />
-                {errors.title && (
-                  <div className="text-danger">{errors.title}</div>
-                )}
-                <textarea
-                  className="addPost__form__textarea input is-link"
-                  placeholder="body"
-                  id="body"
-                  name="body"
-                  rows="3"
-                  onChange={handleChangeBody}
-                  value={post.body}
-                ></textarea>
-                {errors.body && (
-                  <div className="text-danger">{errors.body}</div>
-                )}
               </div>
-            </div>
-            <button className="addPost__form__btn--save  button is-rounded">
-              Save Changes
-            </button>
-          </form>
-            )}
+              <button className="addPost__form__btn--save  button is-rounded">
+                Save Changes
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </React.Fragment>

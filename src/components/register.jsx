@@ -40,12 +40,110 @@ const Register = (props) => {
 
   /* schema */
   const schema = {
-    username2: joi.string().email().required(),
-    password2: joi.string().required().min(6),
-    crmpassword2: joi.string().required().min(6),
-    firstname: joi.string().alphanum().min(3).max(10).required(),
-    lastname: joi.string().alphanum().min(3).max(10).required(),
-    phone: joi.number().required().min(6),
+    username2: joi
+      .string()
+      .email()
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "any.required":
+              return { message: "Userame is Required" };
+            default:
+              return { message: "Invalid Email" };
+          }
+        });
+      }),
+    password2: joi
+      .string()
+      .required()
+      .min(6)
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Password must be more than 6 characters" };
+            case "any.required":
+              return { message: "Password is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    crmpassword2: joi
+      .required()
+      .valid(joi.ref("password2"))
+      .options({ language: { any: { allowOnly: "must match password" } } })
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "any.allowOnly":
+              return { message: "Password and Confirm Password not matched" };
+            case "any.required":
+              return { message: "Confirm Password is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    firstname: joi
+      .string()
+      .alphanum()
+      .min(3)
+      .max(10)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "First Name must be more than 3 characters" };
+            case "string.max":
+              return { message: "First Name must be less than 10 characters" };
+            case "any.required":
+              return { message: "First Name is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    lastname: joi
+      .string()
+      .alphanum()
+      .min(3)
+      .max(10)
+      .required()
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "string.min":
+              return { message: "Last Name must be more than 3 characters" };
+            case "string.max":
+              return { message: "Last Name must be less than 10 characters" };
+            case "any.required":
+              return { message: "Last Name is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
+    phone: joi
+      .number()
+      .required()
+      .min(6)
+      .error((errors) => {
+        return errors.map((error) => {
+          switch (error.type) {
+            case "number.min":
+              return { message: "Phone must be more than 6 characters" };
+            case "number":
+              return { message: "Phone must be Numbers Only" };
+            case "any.required":
+              return { message: "Phone is Required" };
+            default:
+              return { message: "Some thing went wrong" };
+          }
+        });
+      }),
   };
 
   /* validate */
@@ -79,6 +177,7 @@ const Register = (props) => {
     setuser({
       username2: e.target.value,
       password2: user.password2,
+      crmpassword2: user.crmpassword2,
       firstname: user.firstname,
       lastname: user.lastname,
       phone: user.phone,
@@ -90,6 +189,7 @@ const Register = (props) => {
     setuser({
       username2: user.username2,
       password2: e.target.value,
+      crmpassword2: user.crmpassword2,
       firstname: user.firstname,
       lastname: user.lastname,
       phone: user.phone,
@@ -100,7 +200,8 @@ const Register = (props) => {
   let handleChangecrmPassword = (e) => {
     setuser({
       username2: user.username2,
-      password2: e.target.value,
+      password2: user.password2,
+      crmpassword2: e.target.value,
       firstname: user.firstname,
       lastname: user.lastname,
       phone: user.phone,
@@ -112,6 +213,7 @@ const Register = (props) => {
     setuser({
       username2: user.username2,
       password2: user.password2,
+      crmpassword2: user.crmpassword2,
       firstname: e.target.value,
       lastname: user.lastname,
       phone: user.phone,
@@ -123,6 +225,7 @@ const Register = (props) => {
     setuser({
       username2: user.username2,
       password2: user.password2,
+      crmpassword2: user.crmpassword2,
       firstname: user.firstname,
       lastname: e.target.value,
       phone: user.phone,
@@ -134,6 +237,7 @@ const Register = (props) => {
     setuser({
       username2: user.username2,
       password2: user.password2,
+      crmpassword2: user.crmpassword2,
       firstname: user.firstname,
       lastname: user.lastname,
       phone: e.target.value,
@@ -297,7 +401,7 @@ const Register = (props) => {
                       onChange={handleChangePassword}
                       value={password2}
                       id="password2"
-                      name="passwprd"
+                      name="passwprd2"
                     />
                     <span className="icon is-small is-left">
                       <i className="fas fa-lock"></i>
@@ -324,25 +428,25 @@ const Register = (props) => {
                       type="password"
                       placeholder="Confirm Password"
                       onChange={handleChangecrmPassword}
-                      value={crmpassword2}
+                      value={password2}
                       id="crmpassword2"
-                      name="crmpasswprd"
+                      name="crmpasswprd2"
                     />
                     <span className="icon is-small is-left">
                       <i className="fas fa-lock"></i>
                     </span>
                     <span className="icon is-small is-right">
                       {/* <i className="fas fa-check"></i> */}
-                      {!errors.crmpasswprd && (
+                      {!errors.crmpassword2 && (
                         <i className="fas fa-check text-success"></i>
                       )}
-                      {errors.crmpasswprd && (
+                      {errors.crmpassword2 && (
                         <i className="fas fa-times text-danger"></i>
                       )}
                     </span>
                   </p>
-                  {errors.crmpasswprd && (
-                    <div className="text-danger">{errors.crmpasswprd}</div>
+                  {errors.crmpassword2 && (
+                    <div className="text-danger">{errors.crmpassword2}</div>
                   )}
                 </div>
                 {/* image */}
