@@ -1,13 +1,13 @@
-import * as getAllPosts from './getAllPosts';
-import * as getUserById from './getUserById';
+import * as getPosts from './getAllPosts';
+import * as getUser from './getUserById';
 
 export const getAllPostsAndUsers = () => async (dispatch, getState) => {
-    await dispatch(getAllPosts())
+    await dispatch(getPosts())
     const users = getState().posts.map(p => p.userId);
     const uniqueUsers = [];
     users.forEach(usr => {
         if(!uniqueUsers.includes(usr))
             uniqueUsers.push(usr);
     });
-    uniqueUsers.forEach(usr => dispatch(getUserById(usr)))
+    uniqueUsers.forEach(usr => dispatch(getUser(usr)))
 }
