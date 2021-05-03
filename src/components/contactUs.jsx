@@ -5,7 +5,7 @@ const ContactUs = () => {
         <React.Fragment>
             <div className="contact">
                 <div className="wrapper">
-                    <div className="container">
+                    <div className="container  wow zoomIn">
                         <h2 className="contact__header">CONTACT US</h2>
                         <div className="contact__frmwrapper">
                             <form className="contact__form" action="">

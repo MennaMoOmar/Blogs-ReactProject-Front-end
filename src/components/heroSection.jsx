@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import WOW from 'wowjs';
 
 const HeroSection = () => {
+
+    useEffect(()=>{
+        new WOW.WOW({
+            live: false
+        }).init();
+    })
+
     return ( 
         <React.Fragment>
             <div className="herosection">
                 <div className="container">
-                    <h2 className="herosection__header">Explore More Blogs</h2>
+                    <h2 className="herosection__header wow fadeInDown center">Explore More Blogs</h2>
                     <p className="herosection__para">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     <button className="button">Explore Now</button>
                 </div>
