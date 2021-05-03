@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router";
 
-import { getUserById } from "../actions";
+import { getUserById } from "./../actions";
 
 const UserName = (props) => {
   /* history */
