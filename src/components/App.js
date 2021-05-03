@@ -17,6 +17,7 @@ import AddPost from "./addPost"
 import EditPost from "./editPost"
 import CreatePostbtn from "./createPostbtn"
 import NotFound from "./notFound"
+import Totop from "./totop"
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
             <Redirect to="/notfound" />
         </Switch>
       </main>
+      <Totop></Totop>
     </>
   );
 };
