@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import WOW from 'wowjs';
+import { useHistory } from "react-router";
 
 const HeroSection = () => {
+
+  const history = useHistory();
 
     useEffect(()=>{
         new WOW.WOW({
@@ -9,13 +12,17 @@ const HeroSection = () => {
         }).init();
     })
 
+    const exploreHandler = ()=>{
+      history.push("/blogs");
+    }
+
     return ( 
         <React.Fragment>
             <div className="herosection">
                 <div className="container">
                     <h2 className="herosection__header wow fadeInDown center">Explore More Blogs</h2>
                     <p className="herosection__para">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                    <button className="button">Explore Now</button>
+                    <button className="button" onClick={exploreHandler}>Explore Now</button>
                 </div>
                 
             </div>
